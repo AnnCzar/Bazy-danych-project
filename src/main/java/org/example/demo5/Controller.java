@@ -2,7 +2,6 @@ package org.example.demo5;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -10,12 +9,9 @@ import java.net.URL;
 import javafx.scene.control.Spinner;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
 
-public class HelloController implements Initializable {
+public class Controller implements Initializable {
 
     @FXML
     private Label activity_l;
