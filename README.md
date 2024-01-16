@@ -1,8 +1,10 @@
 # ZPO23-L1/BD -project
 
 # Zarys projektu:
-
+Aplikacja ma na celu kontrolowanie spożytych kalorii. Po uruchomieniu programu, wyświetli się okno gdzie jest możliwość utworzenia nowego użytkownika lub przejście do aplikacji poprzez zaloguj.
+Jeżeli uzytkownik kliknie utwórz nowego użykoownika. Użytkownika 
 # Bazy danych:
+* tabela zawierajaca nazwe użtkownika i dane wprowadzone przy tworzeniu nowego użytkownika
 * baza danych produktów + możliwy zapis dodatkowych (tu będą zapisywane potrawy)
 *  możliwość dodania potrawy na podstawie  produktów z powyższej bazy danych 
 * baza danych z wprowadzonymi dziennymi kcal
