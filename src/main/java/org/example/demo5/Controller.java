@@ -58,6 +58,13 @@ public class Controller implements Initializable {
     @FXML
     private CheckBox woman;
 
+    @FXML
+    private Label age_l;
+
+    @FXML
+    private TextField age_t;
+
+
     private String[] activity = {
             "brak (osoba chora, leżąca w łóżku)",
             "mała (osoba wykonująca pracę siedzącą)",
@@ -100,5 +107,29 @@ public class Controller implements Initializable {
     public int getMeals(ActionEvent ev) {
         currentValue = meals.getValue();
         return currentValue;
+    }
+    @FXML
+    public String getGender(ActionEvent event) {
+        if(woman.isSelected()) {
+            return "female";
+        } else if (male.isSelected()) {
+            return "male";
+        }
+        return "nothing is selected";
+    }
+    @FXML
+    public double getHeight(ActionEvent event) {
+        double height = Double.parseDouble(height_t.getText());
+        return height;
+    }
+    @FXML
+    public double getWeight(ActionEvent event) {
+        double weight = Double.parseDouble(weight_t.getText());
+        return weight;
+    }
+    @FXML
+    public int getAge(ActionEvent event) {
+        int age = Integer.parseInt(age_t.getText());
+        return age;
     }
 }
