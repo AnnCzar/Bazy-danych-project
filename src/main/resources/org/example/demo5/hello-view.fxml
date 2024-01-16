@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo5.HelloController">
+    <children>
+        <ChoiceBox fx:id="akt" layoutX="339.0" layoutY="234.0" prefWidth="150.0" />
+        <TextField fx:id="name" layoutX="340.0" layoutY="54.0" />
+        <Label fx:id="name_l" layoutX="77.0" layoutY="54.0" text="Nazwa użytkownika" />
+        <Label fx:id="weight_l" layoutX="79.0" layoutY="146.0" text="Waga (kg)" />
+        <Label fx:id="height_h" layoutX="79.0" layoutY="188.0" text="Wzrost (cm)" />
+        <Label fx:id="activity_l" layoutX="79.0" layoutY="237.0" text="Stopień aktywności fizycznej" />
+        <Label fx:id="goal_l" layoutX="81.0" layoutY="281.0" text="Cel" />
+        <Label fx:id="meals_l" layoutX="81.0" layoutY="326.0" text="Liczba posiłków w ciągu dnia" />
+        <TextField fx:id="weight_t" layoutX="340.0" layoutY="147.0" />
+        <TextField fx:id="height_t" layoutX="340.0" layoutY="187.0" />
+        <ChoiceBox fx:id="goal" layoutX="339.0" layoutY="278.0" prefWidth="150.0" />
+        <Button layoutX="195.0" layoutY="396.0" mnemonicParsing="false" text="Oblicz zapotrzebowanie" />
+      <Label fx:id="gender_l" layoutX="78.0" layoutY="99.0" text="Płeć" />
+      <CheckBox fx:id="woman" layoutX="339.0" layoutY="99.0" mnemonicParsing="false" text="kobieta" />
+      <CheckBox fx:id="male" layoutX="415.0" layoutY="99.0" mnemonicParsing="false" text="mężczyzna" />
+      <Spinner fx:id="meals" layoutX="339.0" layoutY="331.0" />
+    </children>
+</AnchorPane>
