@@ -17,6 +17,8 @@ public class Calc extends Controller {
     protected int age = getAge(event);
     public double cpm() {
         double index;
+        double ppm = 0;
+
         if (activity.equals( "brak (osoba chora, leżąca w łóżku)")) {
             index = 1.2;
         } else if (activity.equals("mała (osoba wykonująca pracę siedzącą)")) {
@@ -31,11 +33,11 @@ public class Calc extends Controller {
             index = 2.4;
         }
         if (gend.equals("female")) {
-            double ppm = 655.1 + (9.563 * weight) + (1.85 * height) - (4.676 * age);
-            return ppm;
-        } 
-
-
-
+            ppm = 655.1 + (9.563 * weight) + (1.85 * height) - (4.676 * age);
+        } else if (gend.equals("male")) {
+            ppm = 66.473 + (13.752 * weight) + (5.003 * height) - (6.775 * age);
+        }
+        double cpm = ppm * index;
+        return cpm;
     }
 }
