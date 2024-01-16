@@ -1,8 +1,16 @@
 package org.example.demo5;
 
-public class cpmCalc extends Controller{
-    public static double cpm (double height, double weight, double act, String goal) {
-        height =
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 
-    }
+public class cpmCalc extends Controller {
+    protected ActionEvent event_act;
+    protected ActionEvent event_goal;
+    protected ActionEvent event_meals;
+    protected String activity = getActivity(event_act);
+    protected String goal = getGoal(event_goal);
+    protected int meal_count = getMeals(event_meals);
+
+    
+
 }

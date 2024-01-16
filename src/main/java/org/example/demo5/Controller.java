@@ -86,18 +86,19 @@ public class Controller implements Initializable {
 
     // Jeśli chcesz reagować na zdarzenia związane z wyborem w ChoiceBox, możesz to zrobić w osobnej metodzie, np.:
     @FXML
-    private void getActivity(ActionEvent event) {
+    public String getActivity(ActionEvent event) {
         String selectedActivity = akt.getValue();
-        System.out.println("Selected Activity: " + selectedActivity);
+        return selectedActivity;
     }
     @FXML
-    private void getGoal(ActionEvent ev) {
+    public String getGoal(ActionEvent ev) {
         String selectedGoal = goal.getValue();
+        return selectedGoal;
 
     }
     @FXML
-    private void getMeals(ActionEvent ev) {
+    public int getMeals(ActionEvent ev) {
         currentValue = meals.getValue();
-
+        return currentValue;
     }
 }
