@@ -94,8 +94,8 @@ public class Controller implements Initializable {
     public String getGoal(ActionEvent ev) {
         String selectedGoal = goal.getValue();
         return selectedGoal;
-
     }
+
     @FXML
     public int getMeals(ActionEvent ev) {
         currentValue = meals.getValue();

@@ -11,9 +11,18 @@ public class Calc extends Controller {
     protected int meal_count = getMeals(event_meals);
 
     public double cpm() {
-        
+        if (activity == "brak (osoba chora, leżąca w łóżku)") {
+
+        }
+
     }
 
 //    proba
 
 }
+"brak (osoba chora, leżąca w łóżku)",
+        "mała (osoba wykonująca pracę siedzącą)",
+        "umiarkowana (osoba wykonująca pracę na stojąco)",
+        "duża (osoba prowadząca aktywny tryb życia, regularnie ćwicząca)",
+        "bardzo duża (osoba prowadząca bardzo aktywny tryb życia, codziennie ćwicząca)",
+        "osoba zawodowo uprawiająca sport"
