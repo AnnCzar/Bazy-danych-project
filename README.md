@@ -22,8 +22,3 @@ Możliowość dodawania użytkownika, produktów i nowych potraw
 * opcjonalne dodawanie ilości kroków, które zostały wykonane i przeliczenie ile kcal spalone
 * opcjonalna możliwość generowania tygoniowych raportów
 
-
-# Praca z bazą danych 
-* wyświetlanie produktów/potrawy z danego zakresu kalorycznego
-* wyświetlanie produktów o danej ilości białka, żeby dobić do celu
-* ew coś jeszcze  
