@@ -3,26 +3,39 @@ package org.example.demo5;
 import javafx.event.ActionEvent;
 
 public class Calc extends Controller {
-    protected ActionEvent event_act;
-    protected ActionEvent event_goal;
-    protected ActionEvent event_meals;
-    protected String activity = getActivity(event_act);
-    protected String goal = getGoal(event_goal);
-    protected int meal_count = getMeals(event_meals);
-
+    // nw jeszcze czy trzeba do kazdego osobny action event czy to nie starczy jeden
+    protected ActionEvent event;
+//    protected ActionEvent event_goal;
+//    protected ActionEvent event_meals;
+    protected ActionEvent gender;
+    protected String activity = getActivity(event);
+    protected String goal = getGoal(event);
+    protected int meal_count = getMeals(event);
+    protected String gend = getGender(event);
+    protected double height = getHeight(event);
+    protected double weight = getWeight(event);
+    protected int age = getAge(event);
     public double cpm() {
-        if (activity == "brak (osoba chora, leżąca w łóżku)") {
-
+        double index;
+        if (activity.equals( "brak (osoba chora, leżąca w łóżku)")) {
+            index = 1.2;
+        } else if (activity.equals("mała (osoba wykonująca pracę siedzącą)")) {
+            index = 1.4;
+        } else if (activity.equals(("umiarkowana (osoba wykonująca pracę na stojąco)"))) {
+            index = 1.6;
+        } else if (activity.equals("duża (osoba prowadząca aktywny tryb życia, regularnie ćwicząca)")) {
+            index = 1.75;
+        } else if (activity.equals("bardzo duża (osoba prowadząca bardzo aktywny tryb życia, codziennie ćwicząca)")) {
+            index = 2.0;
+        } else {
+            index = 2.4;
         }
+        if (gend.equals("female")) {
+            double ppm = 655.1 + (9.563 * weight) + (1.85 * height) - (4.676 * age);
+            return ppm;
+        } 
+
+
 
     }
-
-//    proba
-
 }
-"brak (osoba chora, leżąca w łóżku)",
-        "mała (osoba wykonująca pracę siedzącą)",
-        "umiarkowana (osoba wykonująca pracę na stojąco)",
-        "duża (osoba prowadząca aktywny tryb życia, regularnie ćwicząca)",
-        "bardzo duża (osoba prowadząca bardzo aktywny tryb życia, codziennie ćwicząca)",
-        "osoba zawodowo uprawiająca sport"
