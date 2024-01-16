@@ -132,4 +132,13 @@ public class Controller implements Initializable {
         int age = Integer.parseInt(age_t.getText());
         return age;
     }
+    @FXML
+    public String getName(ActionEvent event) {
+        String username = name.getText();
+        return username;
+    }
+    @FXML
+    public static void buttonAction(ActionEvent event) {
+        
+    }
 }
