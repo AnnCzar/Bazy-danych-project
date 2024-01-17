@@ -2,24 +2,14 @@ package org.example.demo5;
 
 import javafx.event.ActionEvent;
 
-public class Calc extends Controller {
+public class Calc {
     // nw jeszcze czy trzeba do kazdego osobny action event czy to nie starczy jeden
-    protected ActionEvent event;
-//    protected ActionEvent event_goal;
-//    protected ActionEvent event_meals;
-    protected ActionEvent gender;
-    protected String activity = getActivity(event);
-    protected String goal = getGoal(event);
-    protected int meal_count = getMeals(event);
-    protected String gend = getGender(event);
-    protected double height = getHeight(event);
-    protected double weight = getWeight(event);
-    protected int age = getAge(event);
-    public double cpm() {
+    public double cpm(String activity, String goal, int mealCount, String gender, double height, double weight, int age) {
         double index;
         double ppm = 0;
+        double diff = 0;
 
-        if (activity.equals( "brak (osoba chora, leżąca w łóżku)")) {
+        if (activity.equals("brak (osoba chora, leżąca w łóżku)")) {
             index = 1.2;
         } else if (activity.equals("mała (osoba wykonująca pracę siedzącą)")) {
             index = 1.4;
@@ -32,12 +22,29 @@ public class Calc extends Controller {
         } else {
             index = 2.4;
         }
-        if (gend.equals("female")) {
+
+        if (gender.equals("female")) {
             ppm = 655.1 + (9.563 * weight) + (1.85 * height) - (4.676 * age);
-        } else if (gend.equals("male")) {
+        } else if (gender.equals("male")) {
             ppm = 66.473 + (13.752 * weight) + (5.003 * height) - (6.775 * age);
         }
-        double cpm = ppm * index;
-        return cpm;
+        if (goal.equals("schudnąć")) {
+            diff = -0.15 * ppm;
+        } else if(goal.equals("utrzymać wagę")) {
+            diff = 0;
+        } else if (goal.equals("przytyć")) {
+            diff = 0.15 * ppm;
+        }
+// te wartosci bedzie mozna pozmieniac
+        return ppm * index + diff;
     }
+//    public double carbs_kcal(double cpm) {
+//        return 0.45 * cpm;
+//    }
+//    public double protein_kcal(double cpm) {
+//        return 0.25 * cpm;
+//    }
+//    public double fat_kcal(double cpm) {
+//        return 0.3 * cpm;
+//    }
 }

@@ -10,6 +10,7 @@ import javafx.scene.control.Spinner;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.Button;
 
 public class Controller implements Initializable {
 
@@ -18,6 +19,9 @@ public class Controller implements Initializable {
 
     @FXML
     private ChoiceBox<String> akt;
+
+    @FXML
+    private Button count;
 
     @FXML
     private Label gender_l;
@@ -64,6 +68,17 @@ public class Controller implements Initializable {
     @FXML
     private TextField age_t;
 
+    @FXML
+    private Label kcal;
+
+    @FXML
+    private Label carb;
+
+    @FXML
+    private Label fats;
+
+    @FXML
+    private Label prot;
 
     private String[] activity = {
             "brak (osoba chora, leżąca w łóżku)",
@@ -79,19 +94,25 @@ public class Controller implements Initializable {
             "przytyć"
     };
     int currentValue;
-
+    private Calc calculator;
+    public Controller() {
+        this.calculator = new Calc();
+    }
+    private double cpmResult;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        akt.getItems().addAll(activity);
+        if (akt != null) {
+            akt.getItems().addAll(activity);
+        }
         goal.getItems().addAll(goals);
         SpinnerValueFactory<Integer> valueFactory =
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(1,6);
         valueFactory.setValue(1);
         meals.setValueFactory(valueFactory);
+        count.setOnAction(event -> buttonAction());
     }
 
-    // Jeśli chcesz reagować na zdarzenia związane z wyborem w ChoiceBox, możesz to zrobić w osobnej metodzie, np.:
     @FXML
     public String getActivity(ActionEvent event) {
         String selectedActivity = akt.getValue();
@@ -117,6 +138,7 @@ public class Controller implements Initializable {
         }
         return "nothing is selected";
     }
+    // trzeba bedzie dodac zabezpieczenie jakby 2 na raz byly zaznaczone
     @FXML
     public double getHeight(ActionEvent event) {
         double height = Double.parseDouble(height_t.getText());
@@ -138,7 +160,27 @@ public class Controller implements Initializable {
         return username;
     }
     @FXML
-    public static void buttonAction(ActionEvent event) {
-        
+    public void buttonAction() {
+        try {
+            double cpmResult = calculator.cpm(
+                    akt.getValue(),
+                    goal.getValue(),
+                    meals.getValue(),
+                    male.isSelected() ? "male" : (woman.isSelected() ? "female" : "nothing is selected"),
+                    Double.parseDouble(height_t.getText()),
+                    Double.parseDouble(weight_t.getText()),
+                    Integer.parseInt(age_t.getText())
+            );
+            double kcal_prot = Math.round(0.25 * cpmResult* 100.0) / 100.0;
+            double kcal_fat = Math.round(0.3 * cpmResult * 100.0) / 100.0;
+            double kcal_carbs = Math.round(0.45 * cpmResult * 100) / 100.0;
+            kcal.setText("CPM: " + Math.round(cpmResult * 100.0) / 100.0);
+            prot.setText("kcal z białka:\n " +kcal_prot);
+            carb.setText("kcal z węglowodanów:\n " + kcal_carbs);
+            fats.setText("kcal z tłuszczy:\n " + kcal_fat);
+// pozniej poprzesuwam te labele zeby ladniej wygladaly
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

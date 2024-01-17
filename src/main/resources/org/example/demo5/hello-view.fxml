@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo5.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo5.Controller">
     <children>
         <ChoiceBox fx:id="akt" layoutX="339.0" layoutY="288.0" prefWidth="150.0" />
         <TextField fx:id="name" layoutX="340.0" layoutY="54.0" />
@@ -21,12 +21,16 @@
         <TextField fx:id="weight_t" layoutX="340.0" layoutY="188.0" />
         <TextField fx:id="height_t" layoutX="340.0" layoutY="238.0" />
         <ChoiceBox fx:id="goal" layoutX="339.0" layoutY="339.0" prefWidth="150.0" />
-        <Button layoutX="198.0" layoutY="451.0" mnemonicParsing="false" text="Oblicz zapotrzebowanie" />
+        <Button fx:id="count" layoutX="198.0" layoutY="446.0" mnemonicParsing="false" text="Oblicz zapotrzebowanie" />
       <Label fx:id="gender_l" layoutX="77.0" layoutY="99.0" text="Płeć" />
       <CheckBox fx:id="woman" layoutX="339.0" layoutY="99.0" mnemonicParsing="false" text="kobieta" />
       <CheckBox fx:id="male" layoutX="415.0" layoutY="99.0" mnemonicParsing="false" text="mężczyzna" />
       <Spinner fx:id="meals" layoutX="339.0" layoutY="390.0" />
       <Label fx:id="age_l" layoutX="79.0" layoutY="143.0" text="Wiek" />
       <TextField fx:id="age_t" layoutX="341.0" layoutY="139.0" />
+      <Label fx:id="kcal" layoutX="178.0" layoutY="481.0" prefHeight="18.0" prefWidth="182.0" textAlignment="CENTER" />
+      <Label fx:id="prot" layoutX="15.0" layoutY="498.0" prefHeight="62.0" prefWidth="154.0" />
+      <Label fx:id="fats" layoutX="396.0" layoutY="501.0" prefHeight="62.0" prefWidth="150.0" />
+      <Label fx:id="carb" layoutX="204.0" layoutY="498.0" prefHeight="62.0" prefWidth="160.0" />
     </children>
 </AnchorPane>
