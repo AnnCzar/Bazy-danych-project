@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+
+import javafx.scene.control.TableColumn;q
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
@@ -19,16 +21,31 @@ public class MainAppController implements Initializable {
     private Label brekkie;
 
     @FXML
+
+    private TableColumn<?, ?> carbs_col;
+
+    @FXML
+
     private DatePicker date;
 
     @FXML
     private TextField din_search;
 
     @FXML
+    private TableColumn<?, ?> fats_col;
+
+    @FXML
+    private TableColumn<?, ?> id_col;
+
+    @FXML
     private Label intake;
 
     @FXML
     private Label intake_l;
+
+    @FXML
+
+    private TableColumn<?, ?> kcal_col;
 
     @FXML
     private Label lunch;
@@ -38,6 +55,12 @@ public class MainAppController implements Initializable {
 
     @FXML
     private TableView<?> prod_bd;
+
+    @FXML
+    private TableColumn<?, ?> prod_col;
+
+    @FXML
+    private TableColumn<?, ?> prot_col;
 
     @FXML
     private TextField s1_search;
@@ -56,6 +79,7 @@ public class MainAppController implements Initializable {
 
     @FXML
     private Label snack3;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
