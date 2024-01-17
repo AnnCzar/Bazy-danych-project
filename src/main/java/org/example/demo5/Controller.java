@@ -107,8 +107,8 @@ public class Controller implements Initializable {
         }
         goal.getItems().addAll(goals);
         SpinnerValueFactory<Integer> valueFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(1,6);
-        valueFactory.setValue(1);
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(3,6);
+        valueFactory.setValue(3);
         meals.setValueFactory(valueFactory);
         count.setOnAction(event -> buttonAction());
     }
