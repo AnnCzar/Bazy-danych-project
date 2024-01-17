@@ -1,9 +1,11 @@
 package org.example.demo5;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
+
+import javafx.scene.control.TableColumn;q
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
@@ -19,9 +21,11 @@ public class MainAppController implements Initializable {
     private Label brekkie;
 
     @FXML
+
     private TableColumn<?, ?> carbs_col;
 
     @FXML
+
     private DatePicker date;
 
     @FXML
@@ -40,6 +44,7 @@ public class MainAppController implements Initializable {
     private Label intake_l;
 
     @FXML
+
     private TableColumn<?, ?> kcal_col;
 
     @FXML
