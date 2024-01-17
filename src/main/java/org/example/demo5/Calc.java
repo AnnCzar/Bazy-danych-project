@@ -38,6 +38,23 @@ public class Calc {
 // te wartosci bedzie mozna pozmieniac
         return ppm * index + diff;
     }
+    public double calc_bmi (double weight, double height) {
+        double bmi = weight / Math.pow(height/100,2);
+        return bmi;
+    }
+    public String acceptor(double bmi, String goal) {
+        if (bmi < 18.49 && (goal.equals("schudnąć") || goal.equals("utrzymać wagę"))) {
+            return "WYBRANO CEL ZAGRAŻAJĄCY ZDROWIU";
+        } else if (bmi >= 18.50 && bmi <= 24.99) {
+            return "";
+        } else if (bmi > 25 && (goal.equals("przytyć") || goal.equals("utrzymać wagę"))) {
+            return "WYBRANO CEL ZAGRAŻAJĄCY ZDROWIU";
+        }
+        return "";
+    }
+    // dodac zeby nie pozwalalo przejsc dalej jak zagrazajacy zyciu
+
+
 //    public double carbs_kcal(double cpm) {
 //        return 0.45 * cpm;
 //    }

@@ -69,6 +69,9 @@ public class Controller implements Initializable {
     private TextField age_t;
 
     @FXML
+    private Label warn;
+
+    @FXML
     private Label kcal;
 
     @FXML
@@ -171,13 +174,21 @@ public class Controller implements Initializable {
                     Double.parseDouble(weight_t.getText()),
                     Integer.parseInt(age_t.getText())
             );
-            double kcal_prot = Math.round(0.25 * cpmResult* 100.0) / 100.0;
-            double kcal_fat = Math.round(0.3 * cpmResult * 100.0) / 100.0;
-            double kcal_carbs = Math.round(0.45 * cpmResult * 100) / 100.0;
-            kcal.setText("CPM: " + Math.round(cpmResult * 100.0) / 100.0);
-            prot.setText("kcal z białka:\n " +kcal_prot);
-            carb.setText("kcal z węglowodanów:\n " + kcal_carbs);
-            fats.setText("kcal z tłuszczy:\n " + kcal_fat);
+            double bmi = calculator.calc_bmi(Double.parseDouble(weight_t.getText()), Double.parseDouble(height_t.getText()));
+            String acc = calculator.acceptor(bmi, goal.getValue());
+            if (acc == "") {
+                double kcal_prot = Math.round(0.25 * cpmResult * 100.0) / 100.0;
+                double kcal_fat = Math.round(0.3 * cpmResult * 100.0) / 100.0;
+                double kcal_carbs = Math.round(0.45 * cpmResult * 100) / 100.0;
+                kcal.setText("CPM: " + Math.round(cpmResult * 100.0) / 100.0);
+                prot.setText("kcal z białka:\n " + kcal_prot);
+                carb.setText("kcal z węglowodanów:\n " + kcal_carbs);
+                fats.setText("kcal z tłuszczy:\n " + kcal_fat);
+            } else {
+                warn.setText(acc);
+            }
+
+
 // pozniej poprzesuwam te labele zeby ladniej wygladaly
         } catch (Exception e) {
             e.printStackTrace();
