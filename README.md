@@ -1,4 +1,4 @@
-# ZPO23-L1/BD -project
+# Bazy danych -project
 
 # Zarys projektu:
 Aplikacja w formie interfejsu graficznego.
