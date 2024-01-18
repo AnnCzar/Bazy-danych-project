@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import java.net.URL;
 import javafx.scene.control.Spinner;
+
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.scene.control.SpinnerValueFactory;
@@ -14,6 +16,9 @@ import javafx.scene.control.Button;
 
 public class Controller implements Initializable {
 
+    // dodać przycisk cos typu "przejdz dalej" jak klikniemy oblicz to sie pojawi i przejdzie do okna z MainApp
+    // zrobic okno dodawania uzytkownika
+    // zmienne  z okna
     @FXML
     private Label activity_l;
 
@@ -116,6 +121,8 @@ public class Controller implements Initializable {
         count.setOnAction(event -> buttonAction());
     }
 
+
+    // sciaganie danych z okna dodaj bloki try catch i wyswieltenie okna gdy nie wybrano jakiego parametru
     @FXML
     public String getActivity(ActionEvent event) {
         String selectedActivity = akt.getValue();
@@ -132,6 +139,8 @@ public class Controller implements Initializable {
         currentValue = meals.getValue();
         return currentValue;
     }
+
+    // trzeba bedzie dodac zabezpieczenie jakby 2 na raz byly zaznaczone
     @FXML
     public String getGender(ActionEvent event) {
         if(woman.isSelected()) {
@@ -141,10 +150,21 @@ public class Controller implements Initializable {
         }
         return "nothing is selected";
     }
-    // trzeba bedzie dodac zabezpieczenie jakby 2 na raz byly zaznaczone
+
+    // sprawdzic czy takie moze byc obłsuga  wprowdzenia
     @FXML
     public double getHeight(ActionEvent event) {
-        double height = Double.parseDouble(height_t.getText());
+        Double height = 0.0;
+
+        try {
+            Optional<String> optionalInput = Optional.of(height_t.getText());
+//            height = Double.parseDouble(height_t.getText());
+            height = Double.parseDouble(String.valueOf(optionalInput));
+
+        }catch(NumberFormatException e){
+            // alert window
+
+        }
         return height;
     }
     @FXML
@@ -162,9 +182,19 @@ public class Controller implements Initializable {
         String username = name.getText();
         return username;
     }
+
+    // tutaj metoda gdy sie wcisnie przycisk oblicz
     @FXML
     public void buttonAction() {
+
+
+        // tutaj dodawanie do bazy danych
         try {
+            warn.setText("");  // if you click again button
+            kcal.setText("");
+            prot.setText("");
+            carb.setText("");
+            fats.setText("");
             double cpmResult = calculator.cpm(
                     akt.getValue(),
                     goal.getValue(),
@@ -176,6 +206,7 @@ public class Controller implements Initializable {
             );
             double bmi = calculator.calc_bmi(Double.parseDouble(weight_t.getText()), Double.parseDouble(height_t.getText()));
             String acc = calculator.acceptor(bmi, goal.getValue());
+
             if (acc == "") {
                 double kcal_prot = Math.round(0.25 * cpmResult * 100.0) / 100.0;
                 double kcal_fat = Math.round(0.3 * cpmResult * 100.0) / 100.0;
