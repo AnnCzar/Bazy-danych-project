@@ -15,6 +15,16 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.Button;
 
 public class Controller implements Initializable {
+    @FXML
+    public Label warn_user_name;
+    @FXML
+    public Label warn_weight;
+    @FXML
+    public Label warn_age;
+    @FXML
+    public Label warn_gender;
+    @FXML
+    public Label wrong_data;
 
     // dodać przycisk cos typu "przejdz dalej" jak klikniemy oblicz to sie pojawi i przejdzie do okna z MainApp
     // zrobic okno dodawania uzytkownika
@@ -110,6 +120,9 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        /**
+         *
+         */
         if (akt != null) {
             akt.getItems().addAll(activity);
         }
@@ -118,24 +131,38 @@ public class Controller implements Initializable {
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(3,6);
         valueFactory.setValue(3);
         meals.setValueFactory(valueFactory);
-        count.setOnAction(event -> buttonAction());
+        count.setOnAction(event -> buttonAction());  // gdy sie kliknie przycisk
+        name.setOnAction(this::getName); // ew. dodanie przycisku potwierdz imie
+
+//        if(!male.isSelected() ^ woman.isSelected()){
+//            warn_gender.setText("Wybierz jedną płeć"); // do poprawy
+//        }
     }
 
 
     // sciaganie danych z okna dodaj bloki try catch i wyswieltenie okna gdy nie wybrano jakiego parametru
     @FXML
     public String getActivity(ActionEvent event) {
+        /**
+         *
+         */
         String selectedActivity = akt.getValue();
         return selectedActivity;
     }
     @FXML
     public String getGoal(ActionEvent ev) {
+        /**
+         *
+         */
         String selectedGoal = goal.getValue();
         return selectedGoal;
     }
 
     @FXML
     public int getMeals(ActionEvent ev) {
+        /**
+         *
+         */
         currentValue = meals.getValue();
         return currentValue;
     }
@@ -143,6 +170,9 @@ public class Controller implements Initializable {
     // trzeba bedzie dodac zabezpieczenie jakby 2 na raz byly zaznaczone
     @FXML
     public String getGender(ActionEvent event) {
+        /**
+         *
+         */
         if(woman.isSelected()) {
             return "female";
         } else if (male.isSelected()) {
@@ -151,16 +181,14 @@ public class Controller implements Initializable {
         return "nothing is selected";
     }
 
-    // sprawdzic czy takie moze byc obłsuga  wprowdzenia
     @FXML
     public double getHeight(ActionEvent event) {
+        /**
+         *
+         */
         Double height = 0.0;
-
         try {
-            Optional<String> optionalInput = Optional.of(height_t.getText());
-//            height = Double.parseDouble(height_t.getText());
-            height = Double.parseDouble(String.valueOf(optionalInput));
-
+            height = Double.parseDouble(height_t.getText());
         }catch(NumberFormatException e){
             // alert window
 
@@ -169,57 +197,105 @@ public class Controller implements Initializable {
     }
     @FXML
     public double getWeight(ActionEvent event) {
+        /**
+         *
+         */
         double weight = Double.parseDouble(weight_t.getText());
         return weight;
     }
     @FXML
     public int getAge(ActionEvent event) {
+        /**
+         *
+         */
         int age = Integer.parseInt(age_t.getText());
         return age;
     }
     @FXML
     public String getName(ActionEvent event) {
-        String username = name.getText();
-        return username;
+        /**
+         *
+         */
+        try{
+            // check if the name, which user choose is avilable
+            String username = name.getText();
+            if (username.equals("ania")){
+                warn_user_name.setText("Nazwa użytkownika zajęta");
+                return null;
+            }
+            else{
+                return name.getText();
+            }
+
+        }catch(NullPointerException e){
+            e.printStackTrace();
+            return null;
+        }
+//        String username = name.getText();
+//        return username;
     }
 
     // tutaj metoda gdy sie wcisnie przycisk oblicz
+    // dodac klase z dodaawnie do  bazy jak przejda obliczenia
     @FXML
     public void buttonAction() {
+        /**
+         *
+         */
+        String aktv = null;
+        String goal1 = null;
+        Integer meals1 = null;
+        Double height_1 = null;
+        Double weight_t1 = null;
+        Integer age_t1 = null;
 
-
-        // tutaj dodawanie do bazy danych
+        try {
+            aktv = akt.getValue();
+            goal1 = goal.getValue();
+            meals1 = meals.getValue();
+            height_1 = Double.parseDouble(height_t.getText());
+            weight_t1 = Double.parseDouble(weight_t.getText());
+            age_t1 = Integer.parseInt(age_t.getText());
+        }catch(NullPointerException e){
+            e.printStackTrace();
+        }
         try {
             warn.setText("");  // if you click again button
             kcal.setText("");
             prot.setText("");
             carb.setText("");
             fats.setText("");
-            double cpmResult = calculator.cpm(
-                    akt.getValue(),
-                    goal.getValue(),
-                    meals.getValue(),
-                    male.isSelected() ? "male" : (woman.isSelected() ? "female" : "nothing is selected"),
-                    Double.parseDouble(height_t.getText()),
-                    Double.parseDouble(weight_t.getText()),
-                    Integer.parseInt(age_t.getText())
-            );
-            double bmi = calculator.calc_bmi(Double.parseDouble(weight_t.getText()), Double.parseDouble(height_t.getText()));
-            String acc = calculator.acceptor(bmi, goal.getValue());
-
-            if (acc == "") {
-                double kcal_prot = Math.round(0.25 * cpmResult * 100.0) / 100.0;
-                double kcal_fat = Math.round(0.3 * cpmResult * 100.0) / 100.0;
-                double kcal_carbs = Math.round(0.45 * cpmResult * 100) / 100.0;
-                kcal.setText("CPM: " + Math.round(cpmResult * 100.0) / 100.0);
-                prot.setText("kcal z białka:\n " + kcal_prot);
-                carb.setText("kcal z węglowodanów:\n " + kcal_carbs);
-                fats.setText("kcal z tłuszczy:\n " + kcal_fat);
-            } else {
-                warn.setText(acc);
+            wrong_data.setText("");
+            if (height_1 <= 0 || weight_t1 <=0 || age_t1 <=0){
+                wrong_data.setText("Wprowadzono niepoprawne dane.");
             }
+            else {
+                double cpmResult = calculator.cpm(
+                        aktv,
+                        goal1,
+                        meals1,
+                        male.isSelected() ? "male" : (woman.isSelected() ? "female" : "nothing is selected"),
+                        height_1,
+                        weight_t1,
+                        age_t1
+                );
+                double bmi = calculator.calc_bmi(Double.parseDouble(weight_t.getText()), Double.parseDouble(height_t.getText()));
+                String acc = calculator.acceptor(bmi, goal.getValue());
 
+                if (acc == "") {
+                    double kcal_prot = Math.round(0.25 * cpmResult * 100.0) / 100.0;
+                    double kcal_fat = Math.round(0.3 * cpmResult * 100.0) / 100.0;
+                    double kcal_carbs = Math.round(0.45 * cpmResult * 100) / 100.0;
+                    kcal.setText("CPM: " + Math.round(cpmResult * 100.0) / 100.0);
+                    prot.setText("kcal z białka:\n " + kcal_prot);
+                    carb.setText("kcal z węglowodanów:\n " + kcal_carbs);
+                    fats.setText("kcal z tłuszczy:\n " + kcal_fat);
 
+                    // ZAPIS DO BAZY
+                } else {
+                    warn.setText(acc);
+                }
+            }
 // pozniej poprzesuwam te labele zeby ladniej wygladaly
         } catch (Exception e) {
             e.printStackTrace();

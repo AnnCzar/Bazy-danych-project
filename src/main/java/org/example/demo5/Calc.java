@@ -4,7 +4,8 @@ import javafx.event.ActionEvent;
 
 public class Calc {
     // nw jeszcze czy trzeba do kazdego osobny action event czy to nie starczy jeden
-    public double cpm(String activity, String goal, int mealCount, String gender, double height, double weight, int age) {
+    public double cpm(String activity, String goal, Integer mealCount, String gender, Double height,
+                      double weight, Integer age) {
         double index;
         double ppm = 0;
         double diff = 0;
