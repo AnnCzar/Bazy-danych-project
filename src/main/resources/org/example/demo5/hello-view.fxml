@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo5.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="658.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo5.Controller">
     <children>
         <ChoiceBox fx:id="akt" layoutX="339.0" layoutY="288.0" prefWidth="150.0" />
         <TextField fx:id="name" layoutX="340.0" layoutY="54.0" />
@@ -33,5 +28,10 @@
       <Label fx:id="fats" layoutX="396.0" layoutY="501.0" prefHeight="62.0" prefWidth="150.0" />
       <Label fx:id="carb" layoutX="204.0" layoutY="498.0" prefHeight="62.0" prefWidth="160.0" />
       <Label fx:id="warn" layoutX="146.0" layoutY="478.0" prefHeight="101.0" prefWidth="277.0" />
+      <Label fx:id="warn_user_name" layoutX="493.0" layoutY="57.0" prefHeight="18.0" prefWidth="154.0" />
+      <Label fx:id="warn_age" layoutX="503.0" layoutY="143.0" prefHeight="40.0" prefWidth="134.0" />
+      <Label fx:id="warn_weight" layoutX="503.0" layoutY="192.0" prefHeight="40.0" prefWidth="150.0" />
+      <Label fx:id="warn_gender" layoutX="511.0" layoutY="99.0" prefHeight="18.0" prefWidth="134.0" />
+      <Label fx:id="wrong_data" layoutX="145.0" layoutY="488.0" prefHeight="26.0" prefWidth="247.0" />
     </children>
 </AnchorPane>
