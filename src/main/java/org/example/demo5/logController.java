@@ -16,7 +16,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class logController implements Initializable {
-
+    @FXML
+    protected Label warn_login;
+    @FXML
+    protected Button register;
+    @FXML
+    protected Button log;
     @FXML
     protected Button next;
 
@@ -27,19 +32,26 @@ public class logController implements Initializable {
     protected TextField login;
 
     @FXML
+
     protected Button register;
 
     @FXML
     protected Button log;
     @FXML
-    public void logOption(ActionEvent event) {
+//     public void logOption(ActionEvent event) {
+
+    public void logOption() {
+
         us_name.setVisible(true);
         login.setVisible(true);
         next.setVisible(true);
     }
 
     @FXML
-    public void regOption(ActionEvent event) {
+    public void regOption() {
+        us_name.setVisible(false);
+        login.setVisible(false);
+        next.setVisible(false);
         next.setVisible(true);
     }
     @FXML
@@ -70,10 +82,37 @@ public class logController implements Initializable {
         }
     }
 
+    @FXML
+    public  void nextOption(){
+        try{
+            String log =login.getText();
+            if(log.equals("ania")){         // tutuaj sprawdzeenie czy jets w abzie
+
+                warn_login.setText("Nazwa użytkownika zajęta");
+            }
+            else{
+                //zapis do bazy
+
+
+            }
+        }catch(NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        next.setOnAction(this::nextPressed);
-        log.setOnAction(this :: logOption);
-        register.setOnAction(this::regOption);
+
+//         next.setOnAction(this::nextPressed);
+//         log.setOnAction(this :: logOption);
+//         register.setOnAction(this::regOption);
+
+        login.setOnAction(n -> logOption());
+        register.setOnAction(n ->regOption());
+        next.setOnAction(n -> nextOption());
+
+        // Initialization code goes here
+
     }
 }
