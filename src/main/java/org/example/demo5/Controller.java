@@ -134,6 +134,9 @@ public class Controller implements Initializable {
         this.mainAppController = mainAppController;
     }
 
+    protected  MainController mainController = new MainController();
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         /**
@@ -167,6 +170,7 @@ public class Controller implements Initializable {
     @FXML
     public void handleCloseOpenButtonAction() throws IOException {  // przejscie do nowego okna
         try {
+            mainController.setMeals(getMeals());
             Stage stage = (Stage) next_window.getScene().getWindow();
             stage.close();
 
