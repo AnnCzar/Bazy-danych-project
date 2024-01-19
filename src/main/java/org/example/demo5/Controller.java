@@ -259,7 +259,7 @@ public class Controller implements Initializable {
         try{
             // check if the name, which user choose is avilable
             String username = name.getText();
-            if (username.equals("ania")){
+            if (username.equals("ania")){ // pamietac zeby poprawic na sprawdzanie po bazie
                 warn_user_name.setText("Nazwa użytkownika zajęta");
                 return null;
             }
