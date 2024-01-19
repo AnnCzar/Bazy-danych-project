@@ -79,9 +79,25 @@ public class MainAppController implements Initializable {
     @FXML
     private Label snack3;
 
+    private Integer number_meals;
+    @FXML
+    private Label snack1_t;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+//    if(number_meals == 4){
+//        snack1.setVisible(true);
+//        s1_search.setVisible(true);
+//        snack1_t.setVisible(true);
+//    }
+
+    }
+    public void set_number_meals(Integer meals){
+        if (meals != null){
+            number_meals = meals;
+        }else{
+            throw new IllegalArgumentException("Null");
+        }
 
     }
 }

@@ -13,6 +13,7 @@ public class MyApp extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MyApp.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 600);
         stage.setTitle("Nowy użytkownik");
+
         stage.setScene(scene);
         stage.show();
     }

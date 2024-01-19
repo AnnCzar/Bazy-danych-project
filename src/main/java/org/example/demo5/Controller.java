@@ -1,18 +1,24 @@
 package org.example.demo5;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
+//import java.lang.foreign.ValueLayout;
+import java.io.IOException;
 import java.net.URL;
 import javafx.scene.control.Spinner;
 
-import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class Controller implements Initializable {
     @FXML
@@ -98,6 +104,11 @@ public class Controller implements Initializable {
     @FXML
     private Label prot;
 
+    @FXML
+    private Button next_window;
+
+
+
     private String[] activity = {
             "brak (osoba chora, leżąca w łóżku)",
             "mała (osoba wykonująca pracę siedzącą)",
@@ -117,6 +128,11 @@ public class Controller implements Initializable {
         this.calculator = new Calc();
     }
     private double cpmResult;
+    private MainAppController mainAppController;
+
+    public void setMainAppController(MainAppController mainAppController) {
+        this.mainAppController = mainAppController;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -133,13 +149,37 @@ public class Controller implements Initializable {
         meals.setValueFactory(valueFactory);
         count.setOnAction(event -> buttonAction());  // gdy sie kliknie przycisk
         name.setOnAction(this::getName); // ew. dodanie przycisku potwierdz imie
-
+        next_window.setOnAction(event -> {
+            try {
+                handleCloseOpenButtonAction();
+                mainAppController.set_number_meals(getMeals());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
 //        if(!male.isSelected() ^ woman.isSelected()){
 //            warn_gender.setText("Wybierz jedną płeć"); // do poprawy
 //        }
     }
 
 
+
+    @FXML
+    public void handleCloseOpenButtonAction() throws IOException {  // przejscie do nowego okna
+        try {
+            Stage stage = (Stage) next_window.getScene().getWindow();
+            stage.close();
+
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 700, 700);
+            stage.setTitle("Dzienne spożycie");
+            stage.setScene(scene);
+            stage.show();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
     // sciaganie danych z okna dodaj bloki try catch i wyswieltenie okna gdy nie wybrano jakiego parametru
     @FXML
     public String getActivity(ActionEvent event) {
@@ -159,7 +199,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    public int getMeals(ActionEvent ev) {
+    public Integer getMeals() {
         /**
          *
          */
@@ -270,6 +310,7 @@ public class Controller implements Initializable {
                 wrong_data.setText("Wprowadzono niepoprawne dane.");
             }
             else {
+
                 double cpmResult = calculator.cpm(
                         aktv,
                         goal1,
@@ -282,6 +323,8 @@ public class Controller implements Initializable {
                 double bmi = calculator.calc_bmi(Double.parseDouble(weight_t.getText()), Double.parseDouble(height_t.getText()));
                 String acc = calculator.acceptor(bmi, goal.getValue());
 
+
+
                 if (acc == "") {
                     double kcal_prot = Math.round(0.25 * cpmResult * 100.0) / 100.0;
                     double kcal_fat = Math.round(0.3 * cpmResult * 100.0) / 100.0;
@@ -290,7 +333,7 @@ public class Controller implements Initializable {
                     prot.setText("kcal z białka:\n " + kcal_prot);
                     carb.setText("kcal z węglowodanów:\n " + kcal_carbs);
                     fats.setText("kcal z tłuszczy:\n " + kcal_fat);
-
+                    next_window.setVisible(true);
                     // ZAPIS DO BAZY
                 } else {
                     warn.setText(acc);
