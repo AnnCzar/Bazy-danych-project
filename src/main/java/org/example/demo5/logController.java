@@ -51,7 +51,7 @@ public class logController implements Initializable {
             }
             else{
                 //zapis do bazy
-                
+
 
             }
         }catch(NullPointerException e) {
