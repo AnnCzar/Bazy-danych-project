@@ -22,6 +22,11 @@ public class logController implements Initializable {
     protected TextField login;
 
     @FXML
+    protected Button register;
+
+    @FXML
+    protected Button log;
+    @FXML
     public void logOption(ActionEvent event) {
         us_name.setVisible(true);
         login.setVisible(true);
@@ -35,6 +40,8 @@ public class logController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Initialization code goes here
+        //next.setOnAction(this::buttonAction);
+        log.setOnAction(this :: logOption);
+        register.setOnAction(this::regOption);
     }
 }
