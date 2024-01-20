@@ -1,6 +1,7 @@
 module org.example.demo5 {
     requires javafx.controls;
     requires javafx.fxml;
+    requires jakarta.persistence;
 
 
     opens org.example.demo5 to javafx.fxml;
