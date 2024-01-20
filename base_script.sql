@@ -29,7 +29,6 @@ FOREIGN KEY (user_name) REFERENCES users(user_name)
 CREATE TABLE meals(
 meal_id INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
 meal_name VARCHAR(100) NOT NULL,
-amount FLOAT,
 kalc FLOAT NOT NULL,
 proteins FLOAT NOT NULL,
 fat FLOAT NOT NULL,
@@ -42,7 +41,6 @@ FOREIGN KEY (daily_consumption) REFERENCES daily_consumption(id)
 CREATE TABLE products(
 product_id INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
 product_name VARCHAR(100) NOT NULL,
-amount FLOAT,
 kalc FLOAT NOT NULL,
 proteins FLOAT NOT NULL,
 fat FLOAT NOT NULL,
@@ -56,5 +54,4 @@ product_id INT NOT NULL,
 FOREIGN KEY (product_id) REFERENCES products(product_id),
 meal_id INT NOT NULL,
 FOREIGN KEY (meal_id) REFERENCES meals(meal_id)
-
 );
