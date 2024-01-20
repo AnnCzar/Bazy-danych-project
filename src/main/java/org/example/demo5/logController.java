@@ -30,13 +30,7 @@ public class logController implements Initializable {
 
     @FXML
     protected TextField login;
-
-    @FXML
-
-    protected Button register;
-
-    @FXML
-    protected Button log;
+    
     @FXML
 //     public void logOption(ActionEvent event) {
 
