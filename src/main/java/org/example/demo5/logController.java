@@ -31,33 +31,53 @@ public class logController implements Initializable {
     @FXML
     protected TextField login;
 
+
+    private  int which_next = 0;   // zmienna do sprawdzania któy przycisk został wcisniety
+
+
     @FXML
-//     public void logOption(ActionEvent event) {
-
-    public void logOption() {
-
+     public void logOption(ActionEvent event) {
+//    public void logOption() {
+        which_next = 0;
         us_name.setVisible(true);
         login.setVisible(true);
         next.setVisible(true);
+        which_next = 1;  // wcisniecie logowania
     }
 
     @FXML
-    public void regOption() {
+//    public void regOption() {
+    public void regOption(ActionEvent event) {
+        which_next = 0;
         us_name.setVisible(false);
         login.setVisible(false);
         next.setVisible(false);
         next.setVisible(true);
+        which_next = 2;
     }
     @FXML
     public void nextPressed(ActionEvent event) {
         Stage stage = (Stage) log.getScene().getWindow();
-        if (event.getSource() == log) {
-            openMainApp(stage);
-        } else {
+        if (which_next == 1){
+            try{
+                String log =login.getText();
+                if(log.equals("ania")){         // tutaj sprawdzenie czy jets w bazie
+                    warn_login.setText("Nazwa użytkownika niepoprawna");
+                }
+                else{
+                    //zapis do bazy
+                    openMainApp(stage);
+
+                }
+            }catch(NullPointerException e) {
+                e.printStackTrace();
+            }
+
+        }else if (which_next == 2){  //przejscie do okna nowy uzytkownik
             openMyApp(stage);
         }
     }
-
+    @FXML
     private void openMainApp(Stage stage) {
         try {
             MainApp mainApp = new MainApp();
@@ -66,7 +86,7 @@ public class logController implements Initializable {
             e.printStackTrace();
         }
     }
-
+    @FXML
     private void openMyApp(Stage stage) {
         try {
             MyApp myApp = new MyApp();
@@ -76,37 +96,14 @@ public class logController implements Initializable {
         }
     }
 
-    @FXML
-    public  void nextOption(){
-        try{
-            String log =login.getText();
-            if(log.equals("ania")){         // tutuaj sprawdzeenie czy jets w abzie
-
-                warn_login.setText("Nazwa użytkownika zajęta");
-            }
-            else{
-                //zapis do bazy
-
-
-            }
-        }catch(NullPointerException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-//         next.setOnAction(this::nextPressed);
-//         log.setOnAction(this :: logOption);
-//         register.setOnAction(this::regOption);
+         next.setOnAction(this::nextPressed);
+         log.setOnAction(this :: logOption);
+         register.setOnAction(this::regOption);
 
-        login.setOnAction(n -> logOption());
-        register.setOnAction(n ->regOption());
-        next.setOnAction(n -> nextOption());
-
-        // Initialization code goes here
 
     }
 }

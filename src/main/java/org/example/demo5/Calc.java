@@ -2,6 +2,8 @@ package org.example.demo5;
 
 import javafx.event.ActionEvent;
 
+import java.time.LocalDate;
+
 public class Calc {
     // nw jeszcze czy trzeba do kazdego osobny action event czy to nie starczy jeden
     public double cpm(String activity, String goal, Integer mealCount, String gender, Double height,
@@ -53,6 +55,58 @@ public class Calc {
         }
         return "";
     }
+
+
+    String Date_check(Integer day, Integer month, Integer year){
+        int [] days_31 = {1, 3, 5, 7, 8,10, 12};              // Tablica do sprawdzania czy dany miesiąc ma 31 dni.
+        String data = "";
+        LocalDate date1 = null;
+
+        if (day > 31){                // Rzucanie wyjątów dla źle wprowadzonych danych
+            throw new IllegalArgumentException("Entered day is out of the range");
+        }
+        else if (month > 12){
+            throw new IllegalArgumentException("Entered day is out of the range");
+        }
+        else if (day == 31 && (days_31.equals(month)== true)){        // formatowaanie dla daty, która ma 31 dni
+            data += day;
+            if (month < 10){
+                data += "-0" + month + "-" + year;
+            }
+            else{
+                data += "-" + month + "-" +  year;
+            }
+        }
+        else if (day == 31 && (days_31.equals(month)== false)){           // Wyrzucenie wyjatku dla wprowadzonej daty np 31-04-2023
+            throw new IllegalArgumentException("Date does not exist");
+        }
+        else if (month == 2){         // Foramtowanie dla daty z lutym
+            if (day < 10 ){
+                data += "0" + day + "-0" + month + "-" + year;
+            }
+            else if ( day > 29){
+                throw new IllegalArgumentException(" Date does not exist");
+            }
+            else{
+                data += day  + "-0" + month + "-" + year;
+            }
+        }
+        else {
+            if (day < 10 && month < 10){
+                data += "0" + day + "-0" + month + "-" + year;
+            }
+            else if ( day < 10 && month >= 10){
+                data += "0" + day + "-" + month + "-" + year;
+            }
+            else if (day > 9 && month > 9){
+                data += day + "-" + month + "-" + year;
+            }
+            else {
+                data += day + "-0" + month + "-" + year;
+            }
+        }
+        return data;
+    }
     // dodac zeby nie pozwalalo przejsc dalej jak zagrazajacy zyciu
 
 
@@ -65,4 +119,6 @@ public class Calc {
 //    public double fat_kcal(double cpm) {
 //        return 0.3 * cpm;
 //    }
+
+
 }
