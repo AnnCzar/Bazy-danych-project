@@ -30,7 +30,7 @@ public class logController implements Initializable {
 
     @FXML
     protected TextField login;
-    
+
     @FXML
 //     public void logOption(ActionEvent event) {
 
