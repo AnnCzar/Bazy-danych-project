@@ -2,7 +2,6 @@ package org.example.demo5;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -14,11 +13,22 @@ import java.io.IOException;
 import java.net.URL;
 import javafx.scene.control.Spinner;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javafx.event.ActionEvent;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+
+
+// przesyłanie liczby posiłków do kolejnego okna
 
 public class Controller implements Initializable {
     @FXML
@@ -124,17 +134,23 @@ public class Controller implements Initializable {
     };
     int currentValue;
     private Calc calculator;
+    private MainAppController mainAppController;
+
     public Controller() {
         this.calculator = new Calc();
     }
     private double cpmResult;
-    private MainAppController mainAppController;
-
-    public void setMainAppController(MainAppController mainAppController) {
+    public void setMeals(MainAppController mainAppController){
         this.mainAppController = mainAppController;
     }
 
-    protected  MainController mainController = new MainController();
+//    private MainAppController mainAppController;
+//
+//    public void setMainAppController(MainAppController mainAppController) {
+//        this.mainAppController = mainAppController;
+//    }
+//
+//    protected  MainController mainController = new MainController();
 
 
     @Override
@@ -150,12 +166,12 @@ public class Controller implements Initializable {
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(3,6);
         valueFactory.setValue(3);
         meals.setValueFactory(valueFactory);
-        count.setOnAction(event -> buttonAction());  // gdy sie kliknie przycisk
+        count.setOnAction(this::buttonAction);  // gdy sie kliknie przycisk
         name.setOnAction(this::getName); // ew. dodanie przycisku potwierdz imie
         next_window.setOnAction(event -> {
             try {
                 handleCloseOpenButtonAction();
-                mainAppController.set_number_meals(getMeals());
+//                mainAppController.set_number_meals(getMeals());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -169,18 +185,28 @@ public class Controller implements Initializable {
 
     @FXML
     public void handleCloseOpenButtonAction() throws IOException {  // przejscie do nowego okna
-        try {
-            mainController.setMeals(getMeals());
+
+//            mainController.setMeals(getMeals());
             Stage stage = (Stage) next_window.getScene().getWindow();
-            stage.close();
+//            stage.close();
+            openMainApp(stage);
+            Integer meals1 = meals.getValue();
+            mainAppController.set_number_meals(meals1);
 
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 700, 700);
-            stage.setTitle("Dzienne spożycie");
-            stage.setScene(scene);
-            stage.show();
-        }catch (IOException e){
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view.fxml"));
+//            Scene scene = new Scene(fxmlLoader.load(), 700, 700);
+//            stage.setTitle("Dzienne spożycie");
+//            stage.setScene(scene);
+//            stage.show();
+
+    }
+    @FXML
+    private void openMainApp(Stage stage) {
+        try {
+            MainApp mainApp = new MainApp();
+            mainApp.start(stage);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -248,13 +274,50 @@ public class Controller implements Initializable {
         return weight;
     }
     @FXML
-    public int getAge(ActionEvent event) {
+    public int getAge(ActionEvent event) {  // wywalic do Calc
         /**
          *
          */
-        int age = Integer.parseInt(age_t.getText());
-        return age;
+        String dateInput = age_t.getText();
+        LocalDate dateOfBirth =  LocalDate.now();
+        String date_reg1 = "^(\\d{4})-(\\d\\d*)-(\\d\\d*)$";
+        Pattern pattern1 = Pattern.compile(date_reg1);
+        Matcher matcher1 = pattern1.matcher(age_t.getText());
+
+        String date_reg2 = "^(\\d{4}) (\\d\\d*) (\\d\\d*)$";
+        Pattern pattern2 = Pattern.compile(date_reg2);
+        Matcher matcher2 = pattern2.matcher(age_t.getText());
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        try {
+            if (matcher1.matches()) {
+                Integer year = Integer.parseInt(matcher1.group(1));
+                Integer month = Integer.parseInt(matcher1.group(2));
+                Integer day = Integer.parseInt(matcher1.group(3));
+                String tem_date = calculator.Date_check(day, month, year);
+                dateOfBirth = LocalDate.parse(tem_date, df);
+
+            } else if (matcher2.matches()) {
+                Integer year = Integer.parseInt(matcher2.group(1));
+                Integer month = Integer.parseInt(matcher2.group(2));
+                Integer day = Integer.parseInt(matcher2.group(3));
+                String tem_date = calculator.Date_check(day, month, year);
+                dateOfBirth = LocalDate.parse(tem_date, df);
+
+            }else {
+                return 0;
+            }
+        }catch(NumberFormatException e){        // sprawdzic czy dobry wyjątek wylapuje
+            e.printStackTrace();
+        }
+
+        Period intervalPeriod = Period.between(dateOfBirth, currentDate);
+        Integer age = intervalPeriod.getYears();
+
+        System.out.println(age);
+        return  age;
     }
+
     @FXML
     public String getName(ActionEvent event) {
         /**
@@ -262,6 +325,7 @@ public class Controller implements Initializable {
          */
         try{
             // check if the name, which user choose is avilable
+            warn_user_name.setText("");
             String username = name.getText();
             if (username.equals("ania")){ // pamietac zeby poprawic na sprawdzanie po bazie
                 warn_user_name.setText("Nazwa użytkownika zajęta");
@@ -275,17 +339,17 @@ public class Controller implements Initializable {
             e.printStackTrace();
             return null;
         }
-//        String username = name.getText();
-//        return username;
     }
 
     // tutaj metoda gdy sie wcisnie przycisk oblicz
     // dodac klase z dodaawnie do  bazy jak przejda obliczenia
     @FXML
-    public void buttonAction() {
+    public void buttonAction(ActionEvent event) {
         /**
          *
          */
+        System.out.println("Przycisk został naciśnięty.");
+        System.out.println(getAge(event));
         String aktv = null;
         String goal1 = null;
         Integer meals1 = null;
@@ -294,12 +358,13 @@ public class Controller implements Initializable {
         Integer age_t1 = null;
 
         try {
+
             aktv = akt.getValue();
             goal1 = goal.getValue();
             meals1 = meals.getValue();
             height_1 = Double.parseDouble(height_t.getText());
             weight_t1 = Double.parseDouble(weight_t.getText());
-            age_t1 = Integer.parseInt(age_t.getText());
+            age_t1 = Integer.parseInt(String.valueOf(getAge(event)));
         }catch(NullPointerException e){
             e.printStackTrace();
         }
@@ -310,8 +375,11 @@ public class Controller implements Initializable {
             carb.setText("");
             fats.setText("");
             wrong_data.setText("");
-            if (height_1 <= 0 || weight_t1 <=0 || age_t1 <=0){
+            if (height_1 <= 0 || weight_t1 <=0 || age_t1 <=0  || age_t1 >= 150){
                 wrong_data.setText("Wprowadzono niepoprawne dane.");
+            }
+            else if(getName(event) == null){
+                getName(event);
             }
             else {
 
@@ -326,8 +394,6 @@ public class Controller implements Initializable {
                 );
                 double bmi = calculator.calc_bmi(Double.parseDouble(weight_t.getText()), Double.parseDouble(height_t.getText()));
                 String acc = calculator.acceptor(bmi, goal.getValue());
-
-
 
                 if (acc == "") {
                     double kcal_prot = Math.round(0.25 * cpmResult * 100.0) / 100.0;
@@ -348,4 +414,5 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
+
 }
