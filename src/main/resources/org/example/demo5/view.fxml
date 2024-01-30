@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="695.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo5.MainAppController">
    <children>
@@ -75,11 +74,9 @@
       <TextField fx:id="snack2_weight" layoutX="591.0" layoutY="257.0" visible="false" />
       <TextField fx:id="dinner_weight" layoutX="590.0" layoutY="309.0" />
       <TextField fx:id="snack3_weight" layoutX="592.0" layoutY="367.0" visible="false" />
-      <Label fx:id="goal_change" layoutX="714.0" layoutY="655.0" prefHeight="18.0" prefWidth="132.0" text="Zmień cel" textAlignment="CENTER">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
+      <Button fx:id="goal_change" layoutX="720.0" layoutY="643.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Zmień cel" />
+      <Label layoutX="188.0" layoutY="14.0" text="Liczba posiłków" />
+      <Spinner fx:id="meals" layoutX="354.0" layoutY="14.0"  />
       <!-- Pozostałe pola tekstowe -->
    </children>
 

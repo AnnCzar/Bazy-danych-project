@@ -2,6 +2,7 @@ package org.example.demo5;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -41,9 +42,6 @@ public class Controller implements Initializable {
     @FXML
     public Label wrong_data;
 
-    // dodać przycisk cos typu "przejdz dalej" jak klikniemy oblicz to sie pojawi i przejdzie do okna z MainApp
-    // zrobic okno dodawania uzytkownika
-    // zmienne  z okna
     @FXML
     private Label activity_l;
 
@@ -70,9 +68,9 @@ public class Controller implements Initializable {
 
     @FXML
     private CheckBox male;
+//    @FXML
+//    private Spinner<Integer> meals;
 
-    @FXML
-    private Spinner<Integer> meals;
 
     @FXML
     private Label meals_l;
@@ -131,17 +129,14 @@ public class Controller implements Initializable {
             "utrzymać wagę",
             "przytyć"
     };
-    int currentValue;
+
     private Calc calculator;
-    private MainAppController mainAppController;
+
 
     public Controller() {
         this.calculator = new Calc();
     }
     private double cpmResult;
-    public void setMeals(MainAppController mainAppController){
-        this.mainAppController = mainAppController;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -155,9 +150,8 @@ public class Controller implements Initializable {
         SpinnerValueFactory<Integer> valueFactory =
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(3,6);
         valueFactory.setValue(3);
-        meals.setValueFactory(valueFactory);
-        count.setOnAction(this::buttonAction);  // gdy sie kliknie przycisk
-        name.setOnAction(this::getName); // ew. dodanie przycisku potwierdz imie
+        count.setOnAction(this::buttonAction);
+        name.setOnAction(this::getName);
         next_window.setOnAction(event -> {
             try {
                 handleCloseOpenButtonAction();
@@ -170,36 +164,24 @@ public class Controller implements Initializable {
 //        }
     }
 
-
-
     @FXML
     public void handleCloseOpenButtonAction() throws IOException {  // przejscie do nowego okna
-
 
             Stage stage = (Stage) next_window.getScene().getWindow();
             stage.close();
             openMainApp(stage);
-            Integer meals1 = meals.getValue();
-            mainAppController.set_number_meals(meals1);
-
-
-//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view.fxml"));
-//            Scene scene = new Scene(fxmlLoader.load(), 700, 700);
-//            stage.setTitle("Dzienne spożycie");
-//            stage.setScene(scene);
-//            stage.show();
-
     }
+
     @FXML
     private void openMainApp(Stage stage) {
         try {
             MainApp mainApp = new MainApp();
             mainApp.start(stage);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    // sciaganie danych z okna dodaj bloki try catch i wyswieltenie okna gdy nie wybrano jakiego parametru
     @FXML
     public String getActivity(ActionEvent event) {
         /**
@@ -217,14 +199,6 @@ public class Controller implements Initializable {
         return selectedGoal;
     }
 
-    @FXML
-    public Integer getMeals() {
-        /**
-         *
-         */
-        currentValue = meals.getValue();
-        return currentValue;
-    }
 
     // trzeba bedzie dodac zabezpieczenie jakby 2 na raz byly zaznaczone
     @FXML
@@ -330,8 +304,6 @@ public class Controller implements Initializable {
         }
     }
 
-    // tutaj metoda gdy sie wcisnie przycisk oblicz
-    // dodac klase z dodaawnie do  bazy jak przejda obliczenia
     @FXML
     public void buttonAction(ActionEvent event) {
         /**
@@ -350,7 +322,6 @@ public class Controller implements Initializable {
 
             aktv = akt.getValue();
             goal1 = goal.getValue();
-            meals1 = meals.getValue();
             height_1 = Double.parseDouble(height_t.getText());
             weight_t1 = Double.parseDouble(weight_t.getText());
             age_t1 = Integer.parseInt(String.valueOf(getAge(event)));
