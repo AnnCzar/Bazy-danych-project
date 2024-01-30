@@ -22,6 +22,16 @@ public class MainAppController implements Initializable {
     public Label snack_1;
     public Label snack_3;
     public Label snack_2;
+    public Label snack1w;
+    public Label snack2w;
+    public Label snack3w;
+    public TextField snack1_weight;
+    public TextField br_weight;
+    public TextField lunch_weight;
+    public TextField snack2_weight;
+    public TextField dinner_weight;
+    public TextField snack3_weight;
+    public Label goal_change;
     @FXML
     private TextField br_search;
 

@@ -21,7 +21,6 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javafx.event.ActionEvent;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.Button;
@@ -144,15 +143,6 @@ public class Controller implements Initializable {
         this.mainAppController = mainAppController;
     }
 
-//    private MainAppController mainAppController;
-//
-//    public void setMainAppController(MainAppController mainAppController) {
-//        this.mainAppController = mainAppController;
-//    }
-//
-//    protected  MainController mainController = new MainController();
-
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         /**
@@ -171,7 +161,6 @@ public class Controller implements Initializable {
         next_window.setOnAction(event -> {
             try {
                 handleCloseOpenButtonAction();
-//                mainAppController.set_number_meals(getMeals());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -186,9 +175,9 @@ public class Controller implements Initializable {
     @FXML
     public void handleCloseOpenButtonAction() throws IOException {  // przejscie do nowego okna
 
-//            mainController.setMeals(getMeals());
+
             Stage stage = (Stage) next_window.getScene().getWindow();
-//            stage.close();
+            stage.close();
             openMainApp(stage);
             Integer meals1 = meals.getValue();
             mainAppController.set_number_meals(meals1);
@@ -366,8 +355,11 @@ public class Controller implements Initializable {
             weight_t1 = Double.parseDouble(weight_t.getText());
             age_t1 = Integer.parseInt(String.valueOf(getAge(event)));
         }catch(NullPointerException e){
+            wrong_data.setText("Wprowadzono niepoprawne dane.");
             e.printStackTrace();
         }
+
+
         try {
             warn.setText("");  // if you click again button
             kcal.setText("");
@@ -375,6 +367,7 @@ public class Controller implements Initializable {
             carb.setText("");
             fats.setText("");
             wrong_data.setText("");
+
             if (height_1 <= 0 || weight_t1 <=0 || age_t1 <=0  || age_t1 >= 150){
                 wrong_data.setText("Wprowadzono niepoprawne dane.");
             }
@@ -403,6 +396,7 @@ public class Controller implements Initializable {
                     prot.setText("kcal z białka:\n " + kcal_prot);
                     carb.setText("kcal z węglowodanów:\n " + kcal_carbs);
                     fats.setText("kcal z tłuszczy:\n " + kcal_fat);
+
                     next_window.setVisible(true);
                     // ZAPIS DO BAZY
                 } else {
@@ -410,7 +404,7 @@ public class Controller implements Initializable {
                 }
             }
 // pozniej poprzesuwam te labele zeby ladniej wygladaly
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
     }

@@ -2,8 +2,9 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo5.MainAppController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="695.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo5.MainAppController">
    <children>
       <DatePicker fx:id="date" layoutX="9.0" layoutY="14.0" />
       <Label fx:id="brekkie" layoutX="39.0" layoutY="64.0" prefHeight="18.0" prefWidth="58.0" text="Śniadanie" />
@@ -32,7 +33,7 @@
             <TableColumn fx:id="kcal_col" prefWidth="87.0" text="kcal/100 g" />
             <TableColumn fx:id="prot_col" prefWidth="87.0" text="Białko [g] " />
             <TableColumn fx:id="carbs_col" prefWidth="110.0" text="Węglowodany [g]" />
-            <TableColumn fx:id="fats_col" prefWidth="84.0" text="Tłuszcze [g]" />
+            <TableColumn fx:id="fats_col" prefWidth="83.20000000000005" text="Tłuszcze [g]" />
 
          </columns>
 
@@ -44,12 +45,12 @@
       <Label layoutX="392.0" layoutY="51.0" text="Wyszukaj produkt" />
       <Label fx:id="snack_3" layoutX="392.0" layoutY="348.0" prefHeight="18.0" prefWidth="95.0" text="Wyszukaj produkt" visible="false" />
       <Label fx:id="snack_2" layoutX="392.0" layoutY="240.0" text="Wyszukaj produkt" visible="false" />
-      <Button fx:id="add_b" layoutX="582.0" layoutY="70.0" mnemonicParsing="false" onAction="#button_add_b" text="Dodaj" />
-      <Button fx:id="add_s1" layoutX="582.0" layoutY="130.0" mnemonicParsing="false" onAction="#button_add_s1" text="Dodaj" visible="false" />
-      <Button fx:id="add_l" layoutX="582.0" layoutY="190.0" mnemonicParsing="false" onAction="#button_add_l" text="Dodaj" />
-      <Button fx:id="add_s2" layoutX="582.0" layoutY="257.0" mnemonicParsing="false" onAction="#button_add_s2" text="Dodaj" visible="false" />
-      <Button fx:id="add_d" layoutX="582.0" layoutY="309.0" mnemonicParsing="false" onAction="#button_add_d" text="Dodaj" />
-      <Button fx:id="add_s3" layoutX="582.0" layoutY="359.0" mnemonicParsing="false" onAction="#button_add_s3" text="Dodaj" visible="false" />
+      <Button fx:id="add_b" layoutX="765.0" layoutY="69.0" mnemonicParsing="false" onAction="#button_add_b" text="Dodaj" />
+      <Button fx:id="add_s1" layoutX="765.0" layoutY="130.0" mnemonicParsing="false" onAction="#button_add_s1" text="Dodaj" visible="false" />
+      <Button fx:id="add_l" layoutX="765.0" layoutY="190.0" mnemonicParsing="false" onAction="#button_add_l" text="Dodaj" />
+      <Button fx:id="add_s2" layoutX="765.0" layoutY="257.0" mnemonicParsing="false" onAction="#button_add_s2" text="Dodaj" visible="false" />
+      <Button fx:id="add_d" layoutX="765.0" layoutY="309.0" mnemonicParsing="false" onAction="#button_add_d" text="Dodaj" />
+      <Button fx:id="add_s3" layoutX="765.0" layoutY="358.0" mnemonicParsing="false" onAction="#button_add_s3" text="Dodaj" visible="false" />
       <ComboBox fx:id="brSearchComboBox1" focusTraversable="false" layoutX="391.0" layoutY="68.0" opacity="0.0" prefHeight="86.0" prefWidth="150.0" AnchorPane.bottomAnchor="547.0" />
       <ComboBox fx:id="brSearchComboBox2" disable="true" focusTraversable="false" layoutX="393.0" layoutY="130.0" opacity="0.0" prefHeight="98.0" prefWidth="150.0" />
       <ComboBox fx:id="brSearchComboBox3" layoutX="394.0" layoutY="190.0" opacity="0.0" prefHeight="86.0" prefWidth="150.0" />
@@ -62,6 +63,23 @@
       <TextField fx:id="s2_search" layoutX="393.0" layoutY="257.0" visible="false" />
       <TextField fx:id="din_search" layoutX="392.0" layoutY="309.0" />
       <TextField fx:id="s3_search" layoutX="393.0" layoutY="367.0" visible="false" />
+      <Label layoutX="592.0" layoutY="52.0" prefHeight="18.0" prefWidth="115.0" text="Podaj wagę" />
+      <Label fx:id="snack1w" layoutX="591.0" layoutY="111.0" prefHeight="18.0" prefWidth="86.0" text="Podaj wagę" visible="false" />
+      <Label layoutX="589.0" layoutY="171.0" prefHeight="18.0" prefWidth="75.0" text="Podaj wagę" />
+      <Label fx:id="snack2w" layoutX="589.0" layoutY="240.0" prefHeight="18.0" prefWidth="75.0" text="Podaj wagę" visible="false" />
+      <Label layoutX="589.0" layoutY="291.0" prefHeight="18.0" prefWidth="75.0" text="Podaj wagę" />
+      <Label fx:id="snack3w" layoutX="589.0" layoutY="348.0" prefHeight="18.0" prefWidth="75.0" text="Podaj wagę" visible="false" />
+      <TextField fx:id="br_weight" layoutX="589.0" layoutY="69.0" />
+      <TextField fx:id="snack1_weight" layoutX="589.0" layoutY="130.0" visible="false" />
+      <TextField fx:id="lunch_weight" layoutX="590.0" layoutY="190.0" />
+      <TextField fx:id="snack2_weight" layoutX="591.0" layoutY="257.0" visible="false" />
+      <TextField fx:id="dinner_weight" layoutX="590.0" layoutY="309.0" />
+      <TextField fx:id="snack3_weight" layoutX="592.0" layoutY="367.0" visible="false" />
+      <Label fx:id="goal_change" layoutX="714.0" layoutY="655.0" prefHeight="18.0" prefWidth="132.0" text="Zmień cel" textAlignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
       <!-- Pozostałe pola tekstowe -->
    </children>
 
