@@ -20,7 +20,7 @@
       <Label fx:id="gender_l" layoutX="77.0" layoutY="99.0" text="Płeć" />
       <CheckBox fx:id="woman" layoutX="339.0" layoutY="99.0" mnemonicParsing="false" text="kobieta" />
       <CheckBox fx:id="male" layoutX="415.0" layoutY="99.0" mnemonicParsing="false" text="mężczyzna" />
-      <Spinner fx:id="meals" layoutX="339.0" layoutY="390.0" />
+<!--      <Spinner fx:id="meals" layoutX="339.0" layoutY="390.0" />-->
       <Label fx:id="age_l" layoutX="79.0" layoutY="143.0" text="Data urodzenia (RRRR-MM-DD)" />
       <TextField fx:id="age_t" layoutX="341.0" layoutY="139.0" onAction="#getAge"/>
       <Label fx:id="kcal" layoutX="178.0" layoutY="481.0" prefHeight="18.0" prefWidth="182.0" textAlignment="CENTER" />
