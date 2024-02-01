@@ -1,8 +1,8 @@
 package org.example.demo5;
 
-import javafx.event.ActionEvent;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Calc {
     // nw jeszcze czy trzeba do kazdego osobny action event czy to nie starczy jeden
@@ -106,6 +106,21 @@ public class Calc {
             }
         }
         return data;
+    }
+
+    public List<Double> liczenie_kcal(double kcal, double protein, double carbs, double fat, double weight){
+        List<Double> result = new ArrayList<>();
+
+        Double new_kalc = kcal*weight/100;
+        Double new_protein = protein*weight/100;
+        Double new_carbs = carbs*weight/100;
+        Double new_fat = fat*weight/100;
+        result.add(new_kalc);
+        result.add(new_protein);
+        result.add(new_carbs);
+        result.add(new_fat);
+        return result;
+
     }
     // dodac zeby nie pozwalalo przejsc dalej jak zagrazajacy zyciu
 

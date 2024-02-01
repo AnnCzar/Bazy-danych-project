@@ -1,7 +1,7 @@
 package entity;
 
 import jakarta.persistence.*;
-
+import jakarta.persistence.Id;
 import java.util.Objects;
 
 @Entity

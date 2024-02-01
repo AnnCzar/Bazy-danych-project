@@ -6,7 +6,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "daily_consumption", schema = "calories_base", catalog = "")
+@Table(name = "daily_consumption", schema = "calories_base")
 public class DailyConsumptionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
