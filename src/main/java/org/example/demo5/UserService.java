@@ -19,14 +19,14 @@ public class UserService implements Users {
     }
 
 
-    private User mapUsersEntityToUser(UsersEntity usersEntity) {
+    public User mapUsersEntityToUser(UsersEntity usersEntity) {
         if (usersEntity == null) {
             return null;
         }
         return new User(UsersEntity.getUserName(), UsersEntity.getSex(), usersEntity.getWeight(), usersEntity.getHeight(), usersEntity.getAge(), usersEntity.getAvgActivity(), usersEntity.getGoal());
     }
 
-    private static UsersEntity mapUserToUsersEntity(User user) {
+    public static UsersEntity mapUserToUsersEntity(User user) {
         var userEntity = new UsersEntity();
         userEntity.setUserName(user.getUserName());
         userEntity.setSex(user.getSex());

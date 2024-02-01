@@ -8,37 +8,45 @@ import java.util.Objects;
 @Entity
 @Table(name = "users", schema = "calories_base", catalog = "")
 public class UsersEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_name")
     private static String userName;
+
     @Basic
     @Column(name = "sex")
     private static Object sex;
+
     @Basic
     @Column(name = "weight")
     private double weight;
+
     @Basic
     @Column(name = "height")
     private double height;
+
     @Basic
     @Column(name = "age")
     private Integer age;
+
     @Basic
     @Column(name = "avg_activity")
     private Object avgActivity;
+
     @Basic
     @Column(name = "goal")
     private Object goal;
+
     @OneToMany(mappedBy = "usersByUserName")
     private Collection<DailyConsumptionEntity> dailyConsumptionsByUserName;
+
 
     public static String getUserName() {
         return userName;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        UsersEntity.userName = userName;
     }
 
     public static Object getSex() {

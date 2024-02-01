@@ -34,7 +34,9 @@ import jakarta.persistence.EntityManager;
 // przesyłanie liczby posiłków do kolejnego okna
 
 public class Controller implements Initializable {
-//     private final EntityManager entityManager = Persistence.createEntityManagerFactory("default").createEntityManager();
+    private UserService userService;
+
+
     @FXML
     public Label warn_user_name;
     @FXML
@@ -140,7 +142,8 @@ public class Controller implements Initializable {
      private MainAppController mainAppController;
 
     public Controller() {
-
+        EntityManager entityManager = Persistence.createEntityManagerFactory("default").createEntityManager();
+        this.userService = new UserService(new UserRepository(entityManager));
         this.calculator = new Calc();
     }
     private double cpmResult;
@@ -376,15 +379,12 @@ public class Controller implements Initializable {
                     carb.setText("kcal z węglowodanów:\n " + kcal_carbs);
                     fats.setText("kcal z tłuszczy:\n " + kcal_fat);
 
-                    next_window.setVisible(true);
                     User user = new User(getName(event), getGender(event), weight_t1, height_1, age_t1, aktv, goal1);
+                    userService.addUser(user);
 
-//                    // Create an instance of UserService
-//                    UserService userService = new UserService(new UserRepository(entityManager));
-//
-//                    // Call non-static method addUser using the instance
-//                    userService.addUser(user);
-//                    // ZAPIS DO BAZY
+                    next_window.setVisible(true);
+
+
                 } else {
                     warn.setText(acc);
                 }

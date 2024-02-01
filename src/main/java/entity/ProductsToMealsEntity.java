@@ -7,6 +7,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "products_to_meals", schema = "calories_base", catalog = "")
 public class ProductsToMealsEntity {
+
+    @Id
     @Basic
     @Column(name = "product_id")
     private int productId;
