@@ -15,8 +15,8 @@ public class ProductsEntity {
     @Column(name = "product_name")
     private String productName;
     @Basic
-    @Column(name = "kalc")
-    private double kalc;
+    @Column(name = "kacl")
+    private double kacl;
     @Basic
     @Column(name = "proteins")
     private double proteins;
@@ -30,7 +30,7 @@ public class ProductsEntity {
     @Column(name = "daily_consumption")
     private Integer dailyConsumption;
     @ManyToOne
-    @JoinColumn(name = "daily_consumption", referencedColumnName = "id")
+    @JoinColumn(name = "daily_consumption", referencedColumnName = "id", insertable=false, updatable=false)
     private DailyConsumptionEntity dailyConsumptionByDailyConsumption;
 
     public int getProductId() {
@@ -49,12 +49,12 @@ public class ProductsEntity {
         this.productName = productName;
     }
 
-    public double getKalc() {
-        return kalc;
+    public double getKacl() {
+        return kacl;
     }
 
-    public void setKalc(double kalc) {
-        this.kalc = kalc;
+    public void setKacl(double kacl) {
+        this.kacl = kacl;
     }
 
     public double getProteins() {
@@ -94,12 +94,12 @@ public class ProductsEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductsEntity that = (ProductsEntity) o;
-        return productId == that.productId && Double.compare(kalc, that.kalc) == 0 && Double.compare(proteins, that.proteins) == 0 && Double.compare(carbs, that.carbs) == 0 && Double.compare(fat, that.fat) == 0 && Objects.equals(productName, that.productName) && Objects.equals(dailyConsumption, that.dailyConsumption);
+        return productId == that.productId && Double.compare(kacl, that.kacl) == 0 && Double.compare(proteins, that.proteins) == 0 && Double.compare(carbs, that.carbs) == 0 && Double.compare(fat, that.fat) == 0 && Objects.equals(productName, that.productName) && Objects.equals(dailyConsumption, that.dailyConsumption);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId, productName, kalc, proteins, carbs, fat, dailyConsumption);
+        return Objects.hash(productId, productName, kacl, proteins, carbs, fat, dailyConsumption);
     }
 
     public DailyConsumptionEntity getDailyConsumptionByDailyConsumption() {
