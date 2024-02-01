@@ -179,6 +179,14 @@ public class MainAppController implements Initializable {
         userName(); // PRZYPISANIE DO ZMIENNEJ  'username' wprowadzonego username w oknie logowania
         date.setOnAction(this::get_date);
 
+        goal_change.setOnAction(event -> {
+            try {
+                handleCloseOpenButtonAction();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+    });
+
 
 
         //FUNKCJA ŁADUJĄCA DANE DO TABELI Z DANEGO DNIA NA PODSATWIE NAZWY UZYTKOWNIKA (WYWOŁANIE NAZWY UZYTKOWANIKA
@@ -213,6 +221,24 @@ public class MainAppController implements Initializable {
     @FXML
     private void table_daily_consumption(){
 
+    }
+    @FXML
+    public void handleCloseOpenButtonAction() throws IOException {  // przejscie do nowego okna
+
+        Stage stage = (Stage) goal_change.getScene().getWindow();
+        stage.close();
+        openNewApp(stage);
+    }
+
+    @FXML
+    private void openNewApp(Stage stage) {
+        try {
+            newgoalApp newgoal = new newgoalApp();
+            newgoal.start(stage);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     @FXML
     private void initAutoComplete(TextField textField, ObservableList<String> data, ComboBox<String> brSearchComboBox ) {

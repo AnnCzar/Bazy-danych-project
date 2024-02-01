@@ -2,7 +2,12 @@ package org.example.demo5;
 
 import entity.IUserRepository;
 import entity.UsersEntity;
-public class UserService implements Users {
+
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+public class UserService implements IUsersService {
     private final IUserRepository userRepository;
 
     public UserService(IUserRepository userRepository) {
@@ -18,6 +23,11 @@ public class UserService implements Users {
         // Implement the editUser logic if needed
     }
 
+
+//    @Override
+//    public List<User> getHistory() {
+//        return IUserRepository.getHistory().stream().map(this::mapUsersEntityToUser).collect(Collectors.toList());
+//    }
 
     private User mapUsersEntityToUser(UsersEntity usersEntity) {
         if (usersEntity == null) {
@@ -35,7 +45,6 @@ public class UserService implements Users {
         userEntity.setAge(user.getAge());
         userEntity.setAvgActivity(user.getAvgActivity());
         userEntity.setGoal(user.getGoal());
-        userEntity.setDailyConsumptionsByUserName(user.getDailyConsumptionsByUserName());
         return userEntity;
     }
 }

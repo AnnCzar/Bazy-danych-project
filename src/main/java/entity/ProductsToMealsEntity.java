@@ -19,6 +19,8 @@ public class ProductsToMealsEntity {
     @ManyToOne
     @JoinColumn(name = "meal_id", referencedColumnName = "meal_id", nullable = false)
     private MealsEntity mealsByMealId;
+    @Id
+    private Long id;
 
     public int getProductId() {
         return productId;
@@ -63,5 +65,13 @@ public class ProductsToMealsEntity {
 
     public void setMealsByMealId(MealsEntity mealsByMealId) {
         this.mealsByMealId = mealsByMealId;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

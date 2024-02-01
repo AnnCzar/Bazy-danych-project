@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="658.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo5.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="658.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo5.Controller">
     <children>
         <ChoiceBox fx:id="akt" layoutX="339.0" layoutY="288.0" prefWidth="150.0" />
         <TextField fx:id="name" layoutX="340.0" layoutY="54.0" />
@@ -12,17 +15,14 @@
         <Label fx:id="height_h" layoutX="79.0" layoutY="244.0" text="Wzrost (cm)" />
         <Label fx:id="activity_l" layoutX="79.0" layoutY="294.0" text="Stopień aktywności fizycznej" />
         <Label fx:id="goal_l" layoutX="81.0" layoutY="345.0" text="Cel" />
-        <Label fx:id="meals_l" layoutX="81.0" layoutY="393.0" text="Liczba posiłków w ciągu dnia" />
         <TextField fx:id="weight_t" layoutX="340.0" layoutY="188.0" />
         <TextField fx:id="height_t" layoutX="340.0" layoutY="238.0" />
         <ChoiceBox fx:id="goal" layoutX="339.0" layoutY="339.0" prefWidth="150.0" />
         <Button fx:id="count" layoutX="199.0" layoutY="442.0" mnemonicParsing="false" onAction="#buttonAction" text="Oblicz zapotrzebowanie" />
       <Label fx:id="gender_l" layoutX="77.0" layoutY="99.0" text="Płeć" />
-      <CheckBox fx:id="woman" layoutX="339.0" layoutY="99.0" mnemonicParsing="false" text="kobieta" />
-      <CheckBox fx:id="male" layoutX="415.0" layoutY="99.0" mnemonicParsing="false" text="mężczyzna" />
 <!--      <Spinner fx:id="meals" layoutX="339.0" layoutY="390.0" />-->
       <Label fx:id="age_l" layoutX="79.0" layoutY="143.0" text="Data urodzenia (RRRR-MM-DD)" />
-      <TextField fx:id="age_t" layoutX="341.0" layoutY="139.0" onAction="#getAge"/>
+      <TextField fx:id="age_t" layoutX="341.0" layoutY="139.0" onAction="#getAge" />
       <Label fx:id="kcal" layoutX="178.0" layoutY="481.0" prefHeight="18.0" prefWidth="182.0" textAlignment="CENTER" />
       <Label fx:id="prot" layoutX="17.0" layoutY="498.0" prefHeight="62.0" prefWidth="154.0" />
       <Label fx:id="fats" layoutX="396.0" layoutY="501.0" prefHeight="62.0" prefWidth="150.0" />
@@ -34,5 +34,6 @@
       <Label fx:id="warn_gender" layoutX="511.0" layoutY="99.0" prefHeight="18.0" prefWidth="134.0" />
       <Label fx:id="wrong_data" layoutX="145.0" layoutY="488.0" prefHeight="26.0" prefWidth="247.0" />
       <Button fx:id="next_window" layoutX="489.0" layoutY="532.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="122.0" text="Przejdz dalej" visible="false" />
+      <ChoiceBox fx:id="sex_s" layoutX="341.0" layoutY="96.0" prefWidth="150.0" />
     </children>
 </AnchorPane>

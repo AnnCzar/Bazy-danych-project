@@ -3,6 +3,10 @@ package entity;
 import org.example.demo5.User;
 
 public interface IUserRepository {
-    void addUser(User u) ;
-    void editUser(UsersEntity u);
+    void addUser(User userEntity) ;
+    void editUser(UsersEntity userEntity);
+
+//    public static List<User> getHistory();
+
+
 }

@@ -13,7 +13,7 @@ public class MainApp extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("view.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(), 700, 700);
+        Scene scene = new Scene(fxmlLoader.load(), 900, 700);
         stage.setTitle("Dzienne spożycie");
         stage.setScene(scene);
         stage.show();

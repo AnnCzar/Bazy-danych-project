@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="695.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="695.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
 
    <children>
       <DatePicker fx:id="date" layoutX="9.0" layoutY="14.0" />
@@ -70,9 +77,10 @@
       <TextField fx:id="snack2_weight" layoutX="591.0" layoutY="257.0" visible="false" />
       <TextField fx:id="dinner_weight" layoutX="590.0" layoutY="309.0" />
       <TextField fx:id="snack3_weight" layoutX="592.0" layoutY="367.0" visible="false" />
-      <Button fx:id="goal_change" layoutX="720.0" layoutY="643.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Zmień cel" />
+      <Button fx:id="goal_change" layoutX="732.0" layoutY="593.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Zmień cel" />
       <Label layoutX="188.0" layoutY="14.0" text="Liczba posiłków" />
-      <Spinner fx:id="meals" layoutX="354.0" layoutY="14.0" />
+      <Spinner fx:id="meals" layoutX="354.0" layoutY="10.0" />
+      <Button layoutX="638.0" layoutY="643.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="189.0" text="Wyświetl historię użytkownika" />
       <!-- Pozostałe pola tekstowe -->
    </children>
 

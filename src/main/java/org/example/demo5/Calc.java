@@ -26,9 +26,9 @@ public class Calc {
             index = 2.4;
         }
 
-        if (gender.equals("female")) {
+        if (gender.equals("kobieta")) {
             ppm = 655.1 + (9.563 * weight) + (1.85 * height) - (4.676 * age);
-        } else if (gender.equals("male")) {
+        } else if (gender.equals("mężczyzna")) {
             ppm = 66.473 + (13.752 * weight) + (5.003 * height) - (6.775 * age);
         }
         if (goal.equals("schudnąć")) {
@@ -107,18 +107,5 @@ public class Calc {
         }
         return data;
     }
-    // dodac zeby nie pozwalalo przejsc dalej jak zagrazajacy zyciu
-
-
-//    public double carbs_kcal(double cpm) {
-//        return 0.45 * cpm;
-//    }
-//    public double protein_kcal(double cpm) {
-//        return 0.25 * cpm;
-//    }
-//    public double fat_kcal(double cpm) {
-//        return 0.3 * cpm;
-//    }
-
 
 }

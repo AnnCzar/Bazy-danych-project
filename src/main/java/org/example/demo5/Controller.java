@@ -15,12 +15,12 @@ import javafx.scene.control.TextField;
 //import java.lang.foreign.ValueLayout;
 import java.io.IOException;
 import java.net.URL;
-import javafx.scene.control.Spinner;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
@@ -34,7 +34,10 @@ import jakarta.persistence.EntityManager;
 // przesyłanie liczby posiłków do kolejnego okna
 
 public class Controller implements Initializable {
-//     private final EntityManager entityManager = Persistence.createEntityManagerFactory("default").createEntityManager();
+    private EntityManager entityManager;
+
+
+
     @FXML
     public Label warn_user_name;
     @FXML
@@ -47,55 +50,26 @@ public class Controller implements Initializable {
     public Label wrong_data;
 
     @FXML
-    private Label activity_l;
-
-    @FXML
     private ChoiceBox<String> akt;
 
     @FXML
     private Button count;
 
     @FXML
-    private Label gender_l;
-
-    @FXML
     private ChoiceBox<String> goal;
-
-    @FXML
-    private Label goal_l;
-
-    @FXML
-    private Label height_h;
 
     @FXML
     private TextField height_t;
 
-    @FXML
-    private CheckBox male;
-//    @FXML
-//    private Spinner<Integer> meals;
-
 
     @FXML
-    private Label meals_l;
+    private ChoiceBox<String> sex_s;
 
     @FXML
     private TextField name;
 
     @FXML
-    private Label name_l;
-
-    @FXML
-    private Label weight_l;
-
-    @FXML
     private TextField weight_t;
-
-    @FXML
-    private CheckBox woman;
-
-    @FXML
-    private Label age_l;
 
     @FXML
     private TextField age_t;
@@ -133,6 +107,8 @@ public class Controller implements Initializable {
             "utrzymać wagę",
             "przytyć"
     };
+    private String[] sex_choice = {"kobieta", "mężczyzna"};
+
 
     private Calc calculator;
 
@@ -153,6 +129,8 @@ public class Controller implements Initializable {
         if (akt != null) {
             akt.getItems().addAll(activity);
         }
+        sex_s.getItems().addAll(sex_choice);
+
         goal.getItems().addAll(goals);
         SpinnerValueFactory<Integer> valueFactory =
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(3,6);
@@ -210,15 +188,8 @@ public class Controller implements Initializable {
     // trzeba bedzie dodac zabezpieczenie jakby 2 na raz byly zaznaczone
     @FXML
     public String getGender(ActionEvent event) {
-        /**
-         *
-         */
-        if(woman.isSelected()) {
-            return "female";
-        } else if (male.isSelected()) {
-            return "male";
-        }
-        return "nothing is selected";
+        String selectedSex = sex_s.getValue();
+        return selectedSex;
     }
 
     @FXML
@@ -325,6 +296,7 @@ public class Controller implements Initializable {
         Double height_1 = null;
         Double weight_t1 = null;
         Integer age_t1 = null;
+        String sex_t = null;
 
         try {
 
@@ -333,6 +305,7 @@ public class Controller implements Initializable {
             height_1 = Double.parseDouble(height_t.getText());
             weight_t1 = Double.parseDouble(weight_t.getText());
             age_t1 = Integer.parseInt(String.valueOf(getAge(event)));
+            sex_t = sex_s.getValue();
         }catch(NullPointerException e){
             wrong_data.setText("Wprowadzono niepoprawne dane.");
             e.printStackTrace();
@@ -359,7 +332,7 @@ public class Controller implements Initializable {
                         aktv,
                         goal1,
                         meals1,
-                        male.isSelected() ? "male" : (woman.isSelected() ? "female" : "nothing is selected"),
+                        sex_t,
                         height_1,
                         weight_t1,
                         age_t1
@@ -379,17 +352,15 @@ public class Controller implements Initializable {
                     next_window.setVisible(true);
                     User user = new User(getName(event), getGender(event), weight_t1, height_1, age_t1, aktv, goal1);
 
-//                    // Create an instance of UserService
-//                    UserService userService = new UserService(new UserRepository(entityManager));
-//
-//                    // Call non-static method addUser using the instance
-//                    userService.addUser(user);
-//                    // ZAPIS DO BAZY
+                    UserService userService = new UserService(new UserRepository(entityManager));
+
+                    userService.addUser(user);
+
                 } else {
                     warn.setText(acc);
                 }
             }
-// pozniej poprzesuwam te labele zeby ladniej wygladaly
+
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
