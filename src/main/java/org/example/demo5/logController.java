@@ -122,7 +122,6 @@ public class logController implements Initializable {
          register.setOnAction(this::regOption);
 
 
-
     }
 }
 
