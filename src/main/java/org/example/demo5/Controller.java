@@ -291,6 +291,7 @@ public class Controller implements Initializable {
             warn_user_name.setText("");
             String username = name.getText();
             if (username.equals("ania")){ // pamietac zeby poprawic na sprawdzanie po bazie
+                //  funkcja sciaga nazwy uzytkonikow
                 warn_user_name.setText("Nazwa użytkownika zajęta");
                 return null;
             }

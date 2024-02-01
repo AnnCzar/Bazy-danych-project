@@ -2,10 +2,7 @@ package org.example.demo5;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -13,6 +10,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class logController implements Initializable {
@@ -55,37 +54,53 @@ public class logController implements Initializable {
         next.setVisible(true);
         which_next = 2;
     }
+
+    @FXML
+    public String getUserName(){
+        return login.getText();
+    }
     @FXML
     public void nextPressed(ActionEvent event) {
+        warn_login.setVisible(false);
         Stage stage = (Stage) log.getScene().getWindow();
         if (which_next == 1){
             try{
                 String log =login.getText();
-                if(log.equals("ania")){         // tutaj sprawdzenie czy jets w bazie
-                    warn_login.setText("Nazwa użytkownika niepoprawna");
+                List<String> username = new ArrayList<>();
+                // username = // FUNKCJA SCIAGNIECIE NAZW UZYTKOWNIKOW Z BAZY 'USERS'
+
+                // SPRAWDZENIE DZIALANIA - USUNAC JEZELI ZOSTANIE PODLACZONA FUNKCJA
+                username.add("a");
+                username.add("ania");
+                username.add("as");
+
+                if(username.contains(log)){
+                    openMainApp(stage);
+                    // PRZYPISAANIE ZMIENNEJ NAZWY UZYTKOWNIKA - PRZEKAZANIE DO KOLEJNEGO OKNA
                 }
                 else{
-                    //zapis do bazy
-                    openMainApp(stage);
+                    warn_login.setVisible(true);
+                    warn_login.setText("Nazwa użytkownika niepoprawna");
 
                 }
             }catch(NullPointerException e) {
                 e.printStackTrace();
             }
 
-        }else if (which_next == 2){  //przejscie do okna nowy uzytkownik
+        }else if (which_next == 2){  //PRZEJSCIE DO OKNA DZIENNE SPOZYCIE
             openMyApp(stage);
         }
     }
+
     @FXML
     private void openMainApp(Stage stage) {
-        try {
-            MainApp mainApp = new MainApp();
-            mainApp.start(stage);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // PROBA PRZEKAZANIA NAZWY UZYTKOWNIKA
+        MainAppController mainAppController = new MainAppController(this);
+        mainAppController.showStage();
+//            MainApp mainApp = new MainApp();
+//            mainApp.start(stage);
     }
+
     @FXML
     private void openMyApp(Stage stage) {
         try {
@@ -99,7 +114,6 @@ public class logController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
          next.setOnAction(this::nextPressed);
          log.setOnAction(this :: logOption);
          register.setOnAction(this::regOption);
