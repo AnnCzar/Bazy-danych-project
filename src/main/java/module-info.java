@@ -7,7 +7,6 @@ module Test {
     requires jakarta.persistence;
 
 
-    //opens org.example.demo5 to javafx.fxml;
     exports org.example.demo5;
 
 

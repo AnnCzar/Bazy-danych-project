@@ -1,3 +1,4 @@
+
 package entity;
 
 import jakarta.persistence.*;
@@ -66,3 +67,4 @@ public class ProductsToMealsEntity {
         this.mealsByMealId = mealsByMealId;
     }
 }
+

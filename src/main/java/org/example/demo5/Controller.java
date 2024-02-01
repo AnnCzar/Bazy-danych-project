@@ -136,9 +136,6 @@ public class Controller implements Initializable {
 
     private Calc calculator;
 
-
-     private MainAppController mainAppController;
-
     public Controller() {
 
         this.calculator = new Calc();

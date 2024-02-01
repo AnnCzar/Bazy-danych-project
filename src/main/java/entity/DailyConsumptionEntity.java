@@ -1,3 +1,4 @@
+
 package entity;
 
 import jakarta.persistence.*;
@@ -120,3 +121,4 @@ public class DailyConsumptionEntity {
     }
 
 }
+

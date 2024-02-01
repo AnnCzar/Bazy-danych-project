@@ -6,10 +6,10 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "users", schema = "calories_base", catalog = "")
+@Table(name = "users", schema = "calories_base")
 public class UsersEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_name")
     private String userName;
     @Basic
