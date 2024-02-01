@@ -11,10 +11,10 @@ public class UsersEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "user_name")
-    private String userName;
+    private static String userName;
     @Basic
     @Column(name = "sex")
-    private Object sex;
+    private static Object sex;
     @Basic
     @Column(name = "weight")
     private double weight;
@@ -33,7 +33,7 @@ public class UsersEntity {
     @OneToMany(mappedBy = "usersByUserName")
     private Collection<DailyConsumptionEntity> dailyConsumptionsByUserName;
 
-    public String getUserName() {
+    public static String getUserName() {
         return userName;
     }
 
@@ -41,12 +41,12 @@ public class UsersEntity {
         this.userName = userName;
     }
 
-    public Object getSex() {
+    public static Object getSex() {
         return sex;
     }
 
     public void setSex(Object sex) {
-        this.sex = sex;
+        UsersEntity.sex = sex;
     }
 
     public double getWeight() {
@@ -94,7 +94,7 @@ public class UsersEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UsersEntity that = (UsersEntity) o;
-        return Double.compare(weight, that.weight) == 0 && Double.compare(height, that.height) == 0 && Objects.equals(userName, that.userName) && Objects.equals(sex, that.sex) && Objects.equals(age, that.age) && Objects.equals(avgActivity, that.avgActivity) && Objects.equals(goal, that.goal);
+        return Double.compare(weight, that.weight) == 0 && Double.compare(height, that.height) == 0 && Objects.equals(userName, userName) && Objects.equals(sex, that.sex) && Objects.equals(age, that.age) && Objects.equals(avgActivity, that.avgActivity) && Objects.equals(goal, that.goal);
     }
 
     @Override

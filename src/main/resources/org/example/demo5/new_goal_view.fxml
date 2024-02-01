@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="437.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo5.newgoalController">
+   <children>
+      <Button fx:id="confirm_button" layoutX="179.0" layoutY="335.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="Potwierdź" onAction="#buttonConfirm" />
+      <Label layoutX="149.0" layoutY="34.0" prefHeight="18.0" prefWidth="139.0" text="Wprowadź nową wagę" />
+      <Label layoutX="143.0" layoutY="119.0" prefHeight="18.0" prefWidth="176.0" text="Stopień aktywności fizycznej" />
+      <Label layoutX="142.0" layoutY="220.0" prefHeight="18.0" prefWidth="139.0" text="Wybierz cel" />
+      <ChoiceBox fx:id="goal" layoutX="142.0" layoutY="249.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="activity" layoutX="143.0" layoutY="157.0" prefWidth="150.0" />
+      <TextField fx:id="weight" layoutX="143.0" layoutY="68.0" />
+      <Label fx:id="warning" layoutX="144.0" layoutY="288.0" />
+   </children>
+</AnchorPane>
