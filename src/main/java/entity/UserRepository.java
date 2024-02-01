@@ -1,6 +1,8 @@
 package entity;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import org.example.demo5.User;
 
 public class UserRepository implements IUserRepository {
@@ -13,13 +15,20 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public void addUser(User u) {
-        var transaction = entityManager.getTransaction();
-        transaction.begin();
-        entityManager.persist(u);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
+        EntityManager em = emf.createEntityManager();
 
-        transaction.commit();
-
+        try {
+            var transaction = em.getTransaction();
+            transaction.begin();
+            em.persist(u);
+            transaction.commit();
+        } finally {
+            em.close();
+            emf.close();
+        }
     }
+
     @Override
     public void editUser(UsersEntity user) {
         var transaction = entityManager.getTransaction();

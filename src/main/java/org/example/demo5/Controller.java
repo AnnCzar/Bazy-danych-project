@@ -34,7 +34,7 @@ import jakarta.persistence.EntityManager;
 // przesyłanie liczby posiłków do kolejnego okna
 
 public class Controller implements Initializable {
-     private EntityManager entityManager;
+//     private final EntityManager entityManager = Persistence.createEntityManagerFactory("default").createEntityManager();
     @FXML
     public Label warn_user_name;
     @FXML
@@ -142,7 +142,6 @@ public class Controller implements Initializable {
     public Controller() {
 
         this.calculator = new Calc();
-        this.entityManager = Persistence.createEntityManagerFactory("yourPersistenceUnit").createEntityManager();
     }
     private double cpmResult;
 
@@ -380,12 +379,12 @@ public class Controller implements Initializable {
                     next_window.setVisible(true);
                     User user = new User(getName(event), getGender(event), weight_t1, height_1, age_t1, aktv, goal1);
 
-                    // Create an instance of UserService
-                    UserService userService = new UserService(new UserRepository(entityManager));
-
-                    // Call non-static method addUser using the instance
-                    userService.addUser(user);
-                    // ZAPIS DO BAZY
+//                    // Create an instance of UserService
+//                    UserService userService = new UserService(new UserRepository(entityManager));
+//
+//                    // Call non-static method addUser using the instance
+//                    userService.addUser(user);
+//                    // ZAPIS DO BAZY
                 } else {
                     warn.setText(acc);
                 }
