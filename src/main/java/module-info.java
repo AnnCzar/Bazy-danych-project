@@ -6,4 +6,6 @@ module org.example.demo5 {
 
     opens org.example.demo5 to javafx.fxml;
     exports org.example.demo5;
+    //exports;
+    //opens to
 }
