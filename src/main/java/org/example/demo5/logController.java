@@ -28,9 +28,10 @@ public class logController implements Initializable {
     @FXML
     protected Label us_name;
 
+
+
     @FXML
     protected TextField login;
-
 
     private  int which_next = 0;   // zmienna do sprawdzania któy przycisk został wcisniety
 

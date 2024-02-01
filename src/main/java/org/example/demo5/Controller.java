@@ -1,4 +1,6 @@
 package org.example.demo5;
+import entity.UserRepository;
+import jakarta.persistence.Persistence;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,11 +27,14 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import jakarta.persistence.EntityManager;
 
 
 // przesyłanie liczby posiłków do kolejnego okna
 
 public class Controller implements Initializable {
+    private EntityManager entityManager;
+
     @FXML
     public Label warn_user_name;
     @FXML
@@ -136,7 +141,9 @@ public class Controller implements Initializable {
     private MainAppController mainAppController;
 
     public Controller() {
+
         this.calculator = new Calc();
+        this.entityManager = Persistence.createEntityManagerFactory("yourPersistenceUnit").createEntityManager();
     }
     private double cpmResult;
     public void setMeals(MainAppController mainAppController){
@@ -398,7 +405,14 @@ public class Controller implements Initializable {
                     fats.setText("kcal z tłuszczy:\n " + kcal_fat);
 
                     next_window.setVisible(true);
-                    // ZAPIS DO BAZY
+
+                    User user = new User(getName(event), getGender(event), weight_t1, height_1, age_t1, aktv, goal1);
+
+                    // Create an instance of UserService
+                    UserService userService = new UserService(new UserRepository(entityManager));
+
+                    // Call non-static method addUser using the instance
+                    userService.addUser(user);
                 } else {
                     warn.setText(acc);
                 }
@@ -407,6 +421,7 @@ public class Controller implements Initializable {
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
+
     }
 
 }
