@@ -1,6 +1,6 @@
 package org.example.demo5;
 
-import entity.UserRepository;
+//import entity.UserRepository;
 import jakarta.persistence.Persistence;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

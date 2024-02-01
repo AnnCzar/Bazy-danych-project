@@ -23,8 +23,9 @@ public class UserService implements Users {
         if (usersEntity == null) {
             return null;
         }
-        return new User(UsersEntity.getUserName(), UsersEntity.getSex(), usersEntity.getWeight(), usersEntity.getHeight(), usersEntity.getAge(), usersEntity.getAvgActivity(), usersEntity.getGoal());
+        return new User(usersEntity.getUserName(), usersEntity.getSex(), usersEntity.getWeight(), usersEntity.getHeight(), usersEntity.getAge(), usersEntity.getAvgActivity(), usersEntity.getGoal());
     }
+
 
     private static UsersEntity mapUserToUsersEntity(User user) {
         var userEntity = new UsersEntity();
@@ -39,4 +40,4 @@ public class UserService implements Users {
         return userEntity;
     }
 }
-// tu kontrola wyjatkow co do nazwy uzytkownika
+// tu kontrola wyjatkow co do nazwy uzytkownika getDailyConsumptionsByUserName()
