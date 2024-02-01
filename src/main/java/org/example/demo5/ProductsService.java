@@ -30,7 +30,7 @@ public class ProductsService implements IProductsService{
     }
 
     private Products mapProductsEntityToProducts(ProductsEntity productsEntity){
-        return new Products(productsEntity.getProductId(), productsEntity.getProductName(), productsEntity.getKalc(),
+        return new Products(productsEntity.getProductId(), productsEntity.getProductName(), productsEntity.getKacl(),
                 productsEntity.getProteins(), productsEntity.getCarbs(), productsEntity.getFat());
     }
 
@@ -40,7 +40,7 @@ public class ProductsService implements IProductsService{
         productsEntity.setCarbs(product.getCarbs());
         productsEntity.setFat(product.getFat());
         productsEntity.setProteins(product.getProteins());
-        productsEntity.setKalc(product.getKalc());
+        productsEntity.setKacl(product.getKacl());
         return productsEntity;
     }
 

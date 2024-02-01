@@ -9,15 +9,15 @@ public class Products {
 
     private int productId;
     private String productName;
-    private double kalc;
+    private double kacl;
     private double proteins;
     private double carbs;
     private double fat;
 
-    public Products(int productId, String productName, double kalc, double proteins, double carbs, double fat) {
+    public Products(int productId, String productName, double kacl, double proteins, double carbs, double fat) {
         this.productId = productId;
         this.productName = productName;
-        this.kalc = kalc;
+        this.kacl = kacl;
         this.proteins = proteins;
         this.carbs = carbs;
         this.fat = fat;
@@ -39,12 +39,12 @@ public class Products {
         this.productName = productName;
     }
 
-    public double getKalc() {
-        return kalc;
+    public double getKacl() {
+        return kacl;
     }
 
-    public void setKalc(double kalc) {
-        this.kalc = kalc;
+    public void setKacl(double kacl) {
+        this.kacl = kacl;
     }
 
     public double getProteins() {
@@ -76,7 +76,7 @@ public class Products {
         return "Products{" +
                 "productId=" + productId +
                 ", productName='" + productName + '\'' +
-                ", kalc=" + kalc +
+                ", kalc=" + kacl +
                 ", proteins=" + proteins +
                 ", carbs=" + carbs +
                 ", fat=" + fat +

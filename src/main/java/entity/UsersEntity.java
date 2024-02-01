@@ -11,10 +11,10 @@ public class UsersEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "user_name")
-    private static String userName;
+    private String userName;
     @Basic
     @Column(name = "sex")
-    private static Object sex;
+    private Object sex;
     @Basic
     @Column(name = "weight")
     private double weight;
@@ -25,6 +25,9 @@ public class UsersEntity {
     @Column(name = "age")
     private Integer age;
     @Basic
+    @Column(name = "avg_kacl")
+    private Double avgKacl;
+    @Basic
     @Column(name = "avg_activity")
     private Object avgActivity;
     @Basic
@@ -33,7 +36,7 @@ public class UsersEntity {
     @OneToMany(mappedBy = "usersByUserName")
     private Collection<DailyConsumptionEntity> dailyConsumptionsByUserName;
 
-    public static String getUserName() {
+    public String getUserName() {
         return userName;
     }
 
@@ -41,12 +44,12 @@ public class UsersEntity {
         this.userName = userName;
     }
 
-    public static Object getSex() {
+    public Object getSex() {
         return sex;
     }
 
     public void setSex(Object sex) {
-        UsersEntity.sex = sex;
+        this.sex = sex;
     }
 
     public double getWeight() {
@@ -73,6 +76,14 @@ public class UsersEntity {
         this.age = age;
     }
 
+    public Double getAvgKacl() {
+        return avgKacl;
+    }
+
+    public void setAvgKacl(Double avgKacl) {
+        this.avgKacl = avgKacl;
+    }
+
     public Object getAvgActivity() {
         return avgActivity;
     }
@@ -94,12 +105,12 @@ public class UsersEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UsersEntity that = (UsersEntity) o;
-        return Double.compare(weight, that.weight) == 0 && Double.compare(height, that.height) == 0 && Objects.equals(userName, userName) && Objects.equals(sex, that.sex) && Objects.equals(age, that.age) && Objects.equals(avgActivity, that.avgActivity) && Objects.equals(goal, that.goal);
+        return Double.compare(weight, that.weight) == 0 && Double.compare(height, that.height) == 0 && Objects.equals(userName, that.userName) && Objects.equals(sex, that.sex) && Objects.equals(age, that.age) && Objects.equals(avgKacl, that.avgKacl) && Objects.equals(avgActivity, that.avgActivity) && Objects.equals(goal, that.goal);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userName, sex, weight, height, age, avgActivity, goal);
+        return Objects.hash(userName, sex, weight, height, age, avgKacl, avgActivity, goal);
     }
 
     public Collection<DailyConsumptionEntity> getDailyConsumptionsByUserName() {
