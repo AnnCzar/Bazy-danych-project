@@ -10,13 +10,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class MyApp extends Application {
+public class     MyApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        var emf = Persistence.createEntityManagerFactory("default");
-        var em = emf.createEntityManager();
-        var userRepository = new UserRepository(em);
-        var userService = new UserService(userRepository);
 
         FXMLLoader fxmlLoader = new FXMLLoader(MyApp.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 600);
