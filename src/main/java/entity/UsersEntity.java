@@ -9,7 +9,6 @@ import java.util.Objects;
 @Table(name = "users", schema = "calories_base")
 public class UsersEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_name")
     private String userName;
     @Basic
