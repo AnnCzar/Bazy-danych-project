@@ -3,7 +3,6 @@ package org.example.demo5;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +16,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainAppController implements Initializable {
@@ -135,6 +136,17 @@ public class MainAppController implements Initializable {
     private Button add_s3;
 
     @FXML
+    private TextField kcal_intake;
+    @FXML
+    private TextField protein_intake;
+    @FXML
+    private TextField carbs_intake;
+    @FXML
+    private TextField fats_intake;
+    @FXML
+    private TextField kcal_left;
+
+    @FXML
     private String username;
 
     // PROBA PRZEKAZANIA NAZWY UZYTKOWNIKA
@@ -153,8 +165,10 @@ public class MainAppController implements Initializable {
             e.printStackTrace();
         }
     }
-    private void userName(){
+    private String userName(){
+        System.out.println("działa1");
         this.username = logcontroller.getUserName();
+        return username;
     }
     // SPRAWDZENIE CZY DOBRZE DZIALA PRZEKAZANIE NAZWY - DO USUNIECIA
 //    private String userName(){
@@ -169,15 +183,45 @@ public class MainAppController implements Initializable {
         // funkcja siacgajaca nazwy produktów
     @FXML
     private ComboBox<String> brSearchComboBox1;
+    private Calc calculator;
 
+    public void Controller() {
 
-    // ZMIENNE DO ZAPISU
+        this.calculator = new Calc();
+    }
+// ODWOLANIE DO MODELU
+    private MainAppModel model;
+    public void Model(){
+        this.model = new MainAppModel();
+    }
+
+    @FXML
+    public void handleCloseOpenButtonAction1() throws IOException {  // przejscie do nowego okna
+
+        Stage stage = (Stage) goal_change.getScene().getWindow();
+        stage.close();
+        openNewApp1(stage);
+    }
+
+    @FXML
+    private void openNewApp1(Stage stage) {
+        try {
+            newgoalApp newgoal = new newgoalApp();
+            newgoal.start(stage);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+        // ZMIENNE DO ZAPISU
     Date d;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         userName(); // PRZYPISANIE DO ZMIENNEJ  'username' wprowadzonego username w oknie logowania
         date.setOnAction(this::get_date);
+
 
         goal_change.setOnAction(event -> {
             try {
@@ -186,8 +230,6 @@ public class MainAppController implements Initializable {
                 throw new RuntimeException(e);
             }
     });
-
-
 
         //FUNKCJA ŁADUJĄCA DANE DO TABELI Z DANEGO DNIA NA PODSATWIE NAZWY UZYTKOWNIKA (WYWOŁANIE NAZWY UZYTKOWANIKA
         // 'username()' oraz daty 'get_date')
@@ -201,25 +243,40 @@ public class MainAppController implements Initializable {
         SpinnerValueFactory<Integer> valueFactory =
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(3, 6);
         valueFactory.setValue(3);
-
-//        set_number_meals();
+        meals.setValueFactory(valueFactory);
         meals.valueProperty().addListener((observable, oldValue, newValue) -> {
             set_number_meals();
         });
-        meals.setValueFactory(valueFactory);
+        goal_change.setOnAction(event -> {
+            try {
+                handleCloseOpenButtonAction1();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+
 
 
         //dodac pozniej w view.xml onAction do przyciskow
-//        add_b.setOnAction(button_add_b());
-//        add_d.setOnAction();
-//        add_l.setOnAction();
-//        add_s3.setOnAction();
-//        add_s2.setOnAction();
-//        add_s1.setOnAction();
+        add_b.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                button_add_s1(event);
+//                button_another_function(event);
+            }
+        });
+//        add_s1.setOnAction(event -> );
+        add_d.setOnAction(this::button_add_d);
+        add_l.setOnAction(this::button_add_l);
+        add_s3.setOnAction(this::button_add_s3);
+        add_s2.setOnAction(this::button_add_s2);
+        add_s1.setOnAction(this::button_add_s1);
 
     }
     @FXML
     private void table_daily_consumption(){
+        // SCIAGNIECIE NA PODSTAWIE ANZWY UZYTKOWNIKA ORAZ DATY DODANYCH PRODUKTÓW DO 'daily_consumption'
 
     }
     @FXML
@@ -285,67 +342,138 @@ public class MainAppController implements Initializable {
 
     //WYCIAGNEICIE DATY Z KALENDARZA
     @FXML
-    public void get_date(ActionEvent event){
+    public Date get_date(ActionEvent event){
         LocalDate a = date.getValue();
         this.d =  Date.from(a.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
 //        return Date.from(a.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
 
+        return d;
     }
 
     @FXML
     public String get_b(){
-        return brekkie.getText();
+        return br_search.getText();
     }
 
     @FXML
     public String get_s1(){
-        return snack1.getText();
+        return s1_search.getText();
     }
 
     @FXML
     public String get_l(){
-        return lunch.getText();
+        return lunch_search.getText();
     }
 
     @FXML
     public String get_s2(){
-        return snack2.getText();
+        return s2_search.getText();
     }
 
     @FXML
     public String get_d(){
-        return dinner.getText();
+        return din_search.getText();
+    }
+    @FXML
+    public String get_s3(){
+        return s3_search.getText();
     }
 
+
+
+    @FXML
+    public Double get_weight_b(){return Double.parseDouble(br_weight.getText());}
+    @FXML
+    public Double get_weightb_s1(){return Double.parseDouble(snack1_weight.getText());}
+    @FXML
+    public Double get_weight_l(){return Double.parseDouble(lunch_weight.getText());}
+    @FXML
+    public Double get_weight_s2(){return Double.parseDouble(snack2_weight.getText());}
+    @FXML
+    public Double get_weight_d(){return Double.parseDouble(dinner_weight.getText());}
+    @FXML
+    public Double get_weight_s3(){return Double.parseDouble(snack3_weight.getText());}
+    @FXML
     public void button_add_b(ActionEvent event){
-        // odwołanie do funkcji z modelu, sprawdzenie czy jest taki produkt w bazie i dodanie go do bazy danych
-    }
+        try{
+            String name_of_product = get_b();
+            Double weight_of_product = get_weight_b();
+            String user_name = userName();
+            Date date_breakfast = get_date(event);
 
+            model.add_daily_consumption(name_of_product, weight_of_product, user_name, date_breakfast);
+
+        }catch(IllegalArgumentException e){
+            e.printStackTrace();
+        }
+    }
+    @FXML
     public void button_add_s1(ActionEvent event){
+        try{
+            String name_of_product = get_s1();
+            Double weight_of_product = get_weightb_s1();
+            String user_name = userName();
+            Date date_snack1 = get_date(event);
 
-        // odwołanie do funkcji z modelu, sprawdzenie czy jest taki produkt w bazie i dodanie go do bazy danych
-        // aktualizacja satystyki na dole okna
-    }
+            model.add_daily_consumption(name_of_product, weight_of_product, user_name, date_snack1);
+        }catch(IllegalArgumentException e){
+            e.printStackTrace();
+        }
+
+    }@FXML
     public void button_add_l(ActionEvent event){
 
-        // odwołanie do funkcji z modelu, sprawdzenie czy jest taki produkt w bazie i dodanie go do bazy danych
-        // aktualizacja satystyki na dole okna
+        try{
+            String name_of_product = get_l();
+            Double weight_of_product = get_weight_l();
+            String user_name = userName();
+            Date date_lunch= get_date(event);
+
+            model.add_daily_consumption(name_of_product, weight_of_product, user_name, date_lunch);
+        }catch(IllegalArgumentException e){
+            e.printStackTrace();
+        }
     }
+    @FXML
     public void button_add_s2(ActionEvent event){
 
-        // odwołanie do funkcji z modelu, sprawdzenie czy jest taki produkt w bazie i dodanie go do bazy danych
-        // aktualizacja satystyki na dole okna
+        try{
+            String name_of_product = get_s2();
+            Double weight_of_product = get_weight_s2();
+            String user_name = userName();
+            Date date_snack2 = get_date(event);
+
+            model.add_daily_consumption(name_of_product, weight_of_product, user_name, date_snack2);
+        }catch(IllegalArgumentException e){
+            e.printStackTrace();
+        }
     }
+    @FXML
     public void button_add_d(ActionEvent event){
 
-        // odwołanie do funkcji z modelu, sprawdzenie czy jest taki produkt w bazie i dodanie go do bazy danych
-        // aktualizacja satystyki na dole okna
+        try{
+            String name_of_product = get_d();
+            Double weight_of_product = get_weight_d();
+            String user_name = userName();
+            Date date_dinner = get_date(event);
+
+            model.add_daily_consumption(name_of_product, weight_of_product, user_name, date_dinner);
+        }catch(IllegalArgumentException e){
+            e.printStackTrace();
+        }
     }
-
+    @FXML
     public void button_add_s3(ActionEvent event){
+        try{
+            String name_of_product = get_s3();
+            Double weight_of_product = get_weight_s3();
+            String user_name = userName();
+            Date date_snack3= get_date(event);
 
-        // odwołanie do funkcji z modelu, sprawdzenie czy jest taki produkt w bazie i dodanie go do bazy danych
-        // aktualizacja satystyki na dole okna
+            model.add_daily_consumption(name_of_product, weight_of_product, user_name, date_snack3);
+        }catch(IllegalArgumentException e){
+            e.printStackTrace();
+        }
     }
     public Integer getMeals(){
         return meals.getValue();
@@ -405,7 +533,31 @@ public class MainAppController implements Initializable {
                 }
                 break;
         }
-}
+    }
+    private void daily_intake_left(ActionEvent event){
+        Date data = get_date(event);
+        String username = userName();
+
+        // FUNKCJA Z MODELU
+
+        List<Double> result = new ArrayList<Double>();
+
+        result = model.sum_daily_consumption(username, data);
+
+        kcal_intake.setText(String.valueOf(result.get(0)));
+        protein_intake.setText(String.valueOf(result.get(1)));
+        carbs_intake.setText(String.valueOf(result.get(2)));
+        fats_intake.setText(String.valueOf(result.get(3)));
+
+        Double result1 = model.left_daily_consumption(username, data);
+        kcal_left.setText(String.valueOf(result1));
+
+        //
+    }
+
+
+
+
 
 
 }

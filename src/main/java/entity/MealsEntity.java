@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "meals", schema = "calories_base", catalog = "")
+@Table(name = "meals", schema = "calories_base")
 public class MealsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -15,8 +15,8 @@ public class MealsEntity {
     @Column(name = "meal_name")
     private String mealName;
     @Basic
-    @Column(name = "kalc")
-    private double kalc;
+    @Column(name = "kacl")
+    private double kacl;
     @Basic
     @Column(name = "proteins")
     private double proteins;
@@ -30,7 +30,7 @@ public class MealsEntity {
     @Column(name = "products")
     private String products;
     @Basic
-    @Column(name = "daily_consumption")
+    @Column(name = "daily_consumption", insertable=false, updatable=false)
     private Integer dailyConsumption;
     @ManyToOne
     @JoinColumn(name = "daily_consumption", referencedColumnName = "id")
@@ -52,12 +52,12 @@ public class MealsEntity {
         this.mealName = mealName;
     }
 
-    public double getKalc() {
-        return kalc;
+    public double getKacl() {
+        return kacl;
     }
 
-    public void setKalc(double kalc) {
-        this.kalc = kalc;
+    public void setKacl(double kacl) {
+        this.kacl = kacl;
     }
 
     public double getProteins() {
@@ -105,12 +105,12 @@ public class MealsEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MealsEntity that = (MealsEntity) o;
-        return mealId == that.mealId && Double.compare(kalc, that.kalc) == 0 && Double.compare(proteins, that.proteins) == 0 && Double.compare(fat, that.fat) == 0 && Double.compare(carbs, that.carbs) == 0 && Objects.equals(mealName, that.mealName) && Objects.equals(products, that.products) && Objects.equals(dailyConsumption, that.dailyConsumption);
+        return mealId == that.mealId && Double.compare(kacl, that.kacl) == 0 && Double.compare(proteins, that.proteins) == 0 && Double.compare(fat, that.fat) == 0 && Double.compare(carbs, that.carbs) == 0 && Objects.equals(mealName, that.mealName) && Objects.equals(products, that.products) && Objects.equals(dailyConsumption, that.dailyConsumption);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mealId, mealName, kalc, proteins, fat, carbs, products, dailyConsumption);
+        return Objects.hash(mealId, mealName, kacl, proteins, fat, carbs, products, dailyConsumption);
     }
 
     public DailyConsumptionEntity getDailyConsumptionByDailyConsumption() {

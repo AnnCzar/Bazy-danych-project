@@ -1,3 +1,4 @@
+
 package entity;
 
 import jakarta.persistence.*;
@@ -19,8 +20,8 @@ public class DailyConsumptionEntity {
     @Column(name = "meals")
     private String meals;
     @Basic
-    @Column(name = "kalc")
-    private double kalc;
+    @Column(name = "kacl")
+    private double kacl;
     @Basic
     @Column(name = "proteins")
     private double proteins;
@@ -33,6 +34,14 @@ public class DailyConsumptionEntity {
     @Basic
     @Column(name = "user_name")
     private String userName;
+
+    @ManyToOne
+    @JoinColumn(name = "user_name", referencedColumnName = "user_name", insertable=false, updatable=false)
+    private UsersEntity usersByUserName;
+
+    public DailyConsumptionEntity() {
+
+    }
 
     public int getId() {
         return id;
@@ -58,12 +67,12 @@ public class DailyConsumptionEntity {
         this.meals = meals;
     }
 
-    public double getKalc() {
-        return kalc;
+    public double getKacl() {
+        return kacl;
     }
 
-    public void setKalc(double kalc) {
-        this.kalc = kalc;
+    public void setKacl(double kacl) {
+        this.kacl = kacl;
     }
 
     public double getProteins() {
@@ -103,11 +112,13 @@ public class DailyConsumptionEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DailyConsumptionEntity that = (DailyConsumptionEntity) o;
-        return id == that.id && Double.compare(kalc, that.kalc) == 0 && Double.compare(proteins, that.proteins) == 0 && Double.compare(fat, that.fat) == 0 && Double.compare(carbs, that.carbs) == 0 && Objects.equals(date, that.date) && Objects.equals(meals, that.meals) && Objects.equals(userName, that.userName);
+        return id == that.id && Double.compare(kacl, that.kacl) == 0 && Double.compare(proteins, that.proteins) == 0 && Double.compare(fat, that.fat) == 0 && Double.compare(carbs, that.carbs) == 0 && Objects.equals(date, that.date) && Objects.equals(meals, that.meals) && Objects.equals(userName, that.userName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, date, meals, kalc, proteins, fat, carbs, userName);
+        return Objects.hash(id, date, meals, kacl, proteins, fat, carbs, userName);
     }
+
 }
+

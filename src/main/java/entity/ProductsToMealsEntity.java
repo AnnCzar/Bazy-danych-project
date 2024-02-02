@@ -1,3 +1,4 @@
+
 package entity;
 
 import jakarta.persistence.*;
@@ -8,16 +9,17 @@ import java.util.Objects;
 @Table(name = "products_to_meals", schema = "calories_base", catalog = "")
 public class ProductsToMealsEntity {
     @Basic
+    @Id
     @Column(name = "product_id")
     private int productId;
     @Basic
     @Column(name = "meal_id")
     private int mealId;
     @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false)
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false, insertable=false, updatable=false)
     private ProductsEntity productsByProductId;
     @ManyToOne
-    @JoinColumn(name = "meal_id", referencedColumnName = "meal_id", nullable = false)
+    @JoinColumn(name = "meal_id", referencedColumnName = "meal_id", nullable = false, insertable=false, updatable=false)
     private MealsEntity mealsByMealId;
     @Id
     private Long id;
@@ -75,3 +77,4 @@ public class ProductsToMealsEntity {
         return id;
     }
 }
+
