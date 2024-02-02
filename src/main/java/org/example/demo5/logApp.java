@@ -24,11 +24,9 @@
 //}
 //
 //
-
-
 package org.example.demo5;
 
-import entity.UserRepository;
+import org.example.demo5.UsersRepository;
 import jakarta.persistence.Persistence;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -53,14 +51,11 @@ public class logApp extends Application {
         try{
             var emf = Persistence.createEntityManagerFactory("default");
             var em = emf.createEntityManager();
-            var userRepository = new UserRepository(em);
+            var userRepository = new UsersRepository(em);
             userService = new UserService(userRepository);
         }catch(Exception e){
             e.printStackTrace();
         }
-
-
-
 
 //        emf.close();
     }

@@ -20,7 +20,7 @@ public class UsersRepository implements IUsersRepository {
 
 
     @Override
-    public void addUser(UsersEntity usersEntity) {
+    public void addUser(User usersEntity) {
         var transaction = entityManager.getTransaction();
         transaction.begin();
 
@@ -34,7 +34,8 @@ public class UsersRepository implements IUsersRepository {
                 "AFTER UPDATE ON users" +
                 "FOR EACH ROW" +
                 "BEGIN " +
-                "INSERT INTO archive()";
+                "INSERT INTO archive(id, user_name, sex, weight, height, age, avg_activity, goal)" +
+                "VALUES(OLD.id, OLD.user_name, OLD.sex, OLD.weight, OLD.height, OLD.age, OLD.avg_activity+OLD.goal)";
 
     }
 
