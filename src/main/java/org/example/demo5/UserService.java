@@ -2,7 +2,12 @@ package org.example.demo5;
 
 import entity.IUserRepository;
 import entity.UsersEntity;
-public class UserService implements Users {
+
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+public class UserService implements IUsersService {
     private final IUserRepository userRepository;
 
     public UserService(IUserRepository userRepository) {
@@ -19,13 +24,17 @@ public class UserService implements Users {
     }
 
 
+//    @Override
+//    public List<User> getHistory() {
+//        return IUserRepository.getHistory().stream().map(this::mapUsersEntityToUser).collect(Collectors.toList());
+//    }
+
     private User mapUsersEntityToUser(UsersEntity usersEntity) {
         if (usersEntity == null) {
             return null;
         }
-        return new User(usersEntity.getUserName(), usersEntity.getSex(), usersEntity.getWeight(), usersEntity.getHeight(), usersEntity.getAge(), usersEntity.getAvgActivity(), usersEntity.getGoal());
+        return new User(UsersEntity.getUserName(), UsersEntity.getSex(), usersEntity.getWeight(), usersEntity.getHeight(), usersEntity.getAge(), usersEntity.getAvgActivity(), usersEntity.getGoal());
     }
-
 
     private static UsersEntity mapUserToUsersEntity(User user) {
         var userEntity = new UsersEntity();
@@ -36,8 +45,7 @@ public class UserService implements Users {
         userEntity.setAge(user.getAge());
         userEntity.setAvgActivity(user.getAvgActivity());
         userEntity.setGoal(user.getGoal());
-        userEntity.setDailyConsumptionsByUserName(user.getDailyConsumptionsByUserName());
         return userEntity;
     }
 }
-// tu kontrola wyjatkow co do nazwy uzytkownika getDailyConsumptionsByUserName()
+// tu kontrola wyjatkow co do nazwy uzytkownika
