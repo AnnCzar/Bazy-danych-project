@@ -3,11 +3,27 @@ package org.example.demo5;
 import javafx.event.ActionEvent;
 
 import java.time.LocalDate;
-
+/**
+ * Klasa służąca do przeprowadzania różnych obliczeń związanych z dietą i zdrowiem.
+ */
 public class Calc {
-    // nw jeszcze czy trzeba do kazdego osobny action event czy to nie starczy jeden
+
+
     public double cpm(String activity, String goal, Integer mealCount, String gender, Double height,
                       double weight, Integer age) {
+        /**
+         * Metoda obliczająca dzienne zapotrzebowanie kaloryczne użytkownika.
+         *
+         * @param activity   Poziom aktywności fizycznej.
+         * @param goal       Cel dietetyczny (np. schudnąć, utrzymać wagę, przytyć).
+         * @param mealCount  Ilość posiłków dziennie.
+         * @param gender     Płeć użytkownika.
+         * @param height     Wzrost użytkownika w centymetrach.
+         * @param weight     Waga użytkownika w kilogramach.
+         * @param age        Wiek użytkownika.
+         * @return           Dzienne zapotrzebowanie kaloryczne użytkownika.
+         */
+
         double index;
         double ppm = 0;
         double diff = 0;
@@ -42,10 +58,24 @@ public class Calc {
         return ppm * index + diff;
     }
     public double calc_bmi (double weight, double height) {
+        /**
+         * Metoda obliczająca wskaźnik BMI (Body Mass Index) użytkownika.
+         *
+         * @param weight Waga użytkownika w kilogramach.
+         * @param height Wzrost użytkownika w centymetrach.
+         * @return       Wskaźnik BMI.
+         */
         double bmi = weight / Math.pow(height/100,2);
         return bmi;
     }
     public String acceptor(double bmi, String goal) {
+        /**
+         * Metoda sprawdzająca, czy wybrane cele i wskaźniki BMI są zgodne z zaleceniami zdrowotnymi.
+         *
+         * @param bmi   Wskaźnik BMI użytkownika.
+         * @param goal  Cel dietetyczny (np. schudnąć, utrzymać wagę, przytyć).
+         * @return      Informacja o zgodności celu z zaleceniami zdrowotnymi.
+         */
         if (bmi < 18.49 && (goal.equals("schudnąć") || goal.equals("utrzymać wagę"))) {
             return "WYBRANO CEL ZAGRAŻAJĄCY ZDROWIU";
         } else if (bmi >= 18.50 && bmi <= 24.99) {
@@ -58,6 +88,15 @@ public class Calc {
 
 
     String Date_check(Integer day, Integer month, Integer year){
+        /**
+         * Metoda formatująca wprowadzoną datę i sprawdzająca jej poprawność.
+         *
+         * @param day   Dzień wprowadzonej daty.
+         * @param month Miesiąc wprowadzonej daty.
+         * @param year  Rok wprowadzonej daty.
+         * @return      Sformatowana data.
+         * @throws IllegalArgumentException Wyjątek w przypadku błędnych danych wejściowych.
+         */
         int [] days_31 = {1, 3, 5, 7, 8,10, 12};              // Tablica do sprawdzania czy dany miesiąc ma 31 dni.
         String data = "";
         LocalDate date1 = null;

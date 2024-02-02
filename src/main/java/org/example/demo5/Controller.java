@@ -1,6 +1,6 @@
 
 package org.example.demo5;
-import entity.UserRepository;
+//import entity.UserRepository;
 import jakarta.persistence.Persistence;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,10 +30,15 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import jakarta.persistence.EntityManager;
+import org.example.demo5.zpo.uzytkow;
 
-// przesyłanie liczby posiłków do kolejnego okna
+
 
 public class Controller implements Initializable {
+    /**
+     * Kontroler obsługujący interakcje z interfejsem graficznym.
+     * Zarządza wprowadzonymi danymi, obliczeniami oraz przechodzeniem między oknami.
+     */
     private EntityManager entityManager;
 
 
@@ -50,7 +55,7 @@ public class Controller implements Initializable {
     public Label wrong_data;
 
     @FXML
-    private ChoiceBox<String> akt;
+    ChoiceBox<String> akt;
 
     @FXML
     private Button count;
@@ -60,7 +65,6 @@ public class Controller implements Initializable {
 
     @FXML
     private TextField height_t;
-
 
     @FXML
     private ChoiceBox<String> sex_s;
@@ -93,7 +97,6 @@ public class Controller implements Initializable {
     private Button next_window;
 
 
-
     private String[] activity = {
             "brak (osoba chora, leżąca w łóżku)",
             "mała (osoba wykonująca pracę siedzącą)",
@@ -109,9 +112,7 @@ public class Controller implements Initializable {
     };
     private String[] sex_choice = {"kobieta", "mężczyzna"};
 
-
     private Calc calculator;
-
 
      private MainAppController mainAppController;
 
@@ -139,19 +140,21 @@ public class Controller implements Initializable {
         name.setOnAction(this::getName);
         next_window.setOnAction(event -> {
             try {
-                handleCloseOpenButtonAction();
+                handleCloseOpenButtonAction1();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
-//        if(!male.isSelected() ^ woman.isSelected()){
-//            warn_gender.setText("Wybierz jedną płeć"); // do poprawy
-//        }
+
     }
 
     @FXML
-    public void handleCloseOpenButtonAction() throws IOException {  // przejscie do nowego okna
-
+    public void handleCloseOpenButtonAction1() throws IOException {  // przejscie do nowego okna
+        /**
+         * Metoda obsługująca zamknięcie bieżącego okna i otwierająca nowe okno aplikacji.
+         *
+         * @throws IOException Wyjątek zgłaszany w przypadku problemów z otwarciem nowego okna.
+         */
             Stage stage = (Stage) next_window.getScene().getWindow();
             stage.close();
             openMainApp(stage);
@@ -159,9 +162,15 @@ public class Controller implements Initializable {
 
     @FXML
     private void openMainApp(Stage stage) {
+        /**
+         * Metoda otwierająca nowe okno głównej aplikacji.
+         *
+         * @param stage Bieżący etap (okno), na którym metoda ma otworzyć nowe okno.
+         */
         try {
-            MainApp mainApp = new MainApp();
-            mainApp.start(stage);
+
+            newgoalApp newGoalApp = new newgoalApp();
+            newGoalApp.start(new Stage());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -170,7 +179,10 @@ public class Controller implements Initializable {
     @FXML
     public String getActivity(ActionEvent event) {
         /**
+         * Metoda pobierająca wybraną aktywność z interfejsu graficznego.
          *
+         * @param event Zdarzenie, które wywołało tę metodę.
+         * @return Wybrana aktywność.
          */
         String selectedActivity = akt.getValue();
         return selectedActivity;
@@ -178,7 +190,10 @@ public class Controller implements Initializable {
     @FXML
     public String getGoal(ActionEvent ev) {
         /**
+         * Metoda pobierająca wybrany cel z interfejsu graficznego.
          *
+         * @param ev Zdarzenie, które wywołało tę metodę.
+         * @return Wybrany cel.
          */
         String selectedGoal = goal.getValue();
         return selectedGoal;
@@ -188,6 +203,11 @@ public class Controller implements Initializable {
     // trzeba bedzie dodac zabezpieczenie jakby 2 na raz byly zaznaczone
     @FXML
     public String getGender(ActionEvent event) {
+        /**
+         * Metoda obsługująca przycisk obliczeń i wyświetlająca wyniki w interfejsie graficznym.
+         *
+         * @param event Zdarzenie, które wywołało tę metodę.
+         */
         String selectedSex = sex_s.getValue();
         return selectedSex;
     }
@@ -350,11 +370,13 @@ public class Controller implements Initializable {
                     fats.setText("kcal z tłuszczy:\n " + kcal_fat);
 
                     next_window.setVisible(true);
+//                    User user = new User(getName(event), getGender(event), weight_t1, height_1, age_t1, aktv, goal1);
                     User user = new User(getName(event), getGender(event), weight_t1, height_1, age_t1, aktv, goal1);
+                    uzytkow uzytkownik = new uzytkow(user.getUserName(), user.getSex(), user.getWeight(), user.getHeight(), user.getAge(), user.getAvgActivity(), user.getGoal());
+                    uzytkownik.addUser(user);
+//                    UserService userService = new UserService(new UserRepository(entityManager));
 
-                    UserService userService = new UserService(new UserRepository(entityManager));
-
-                    userService.addUser(user);
+//                    userService.addUser(user);
 
                 } else {
                     warn.setText(acc);

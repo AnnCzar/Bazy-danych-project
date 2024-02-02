@@ -29,12 +29,12 @@ public class UserService implements IUsersService {
 //        return IUserRepository.getHistory().stream().map(this::mapUsersEntityToUser).collect(Collectors.toList());
 //    }
 
-    private User mapUsersEntityToUser(UsersEntity usersEntity) {
-        if (usersEntity == null) {
-            return null;
-        }
-        return new User(UsersEntity.getUserName(), UsersEntity.getSex(), usersEntity.getWeight(), usersEntity.getHeight(), usersEntity.getAge(), usersEntity.getAvgActivity(), usersEntity.getGoal());
-    }
+//    private User mapUsersEntityToUser(UsersEntity usersEntity) {
+//        if (usersEntity == null) {
+//            return null;
+//        }
+//        return new User(UsersEntity.getUserName(), UsersEntity.getSex(), usersEntity.getWeight(), usersEntity.getHeight(), usersEntity.getAge(), usersEntity.getAvgActivity(), usersEntity.getGoal());
+//    }
 
     private static UsersEntity mapUserToUsersEntity(User user) {
         var userEntity = new UsersEntity();

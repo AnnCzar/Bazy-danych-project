@@ -136,15 +136,15 @@ public class MainAppController implements Initializable {
     private Button add_s3;
 
     @FXML
-    private TextField kcal_intake;
+    private Label kcal_intake;
     @FXML
-    private TextField protein_intake;
+    private Label protein_intake;
     @FXML
-    private TextField carbs_intake;
+    private Label carbs_intake;
     @FXML
-    private TextField fats_intake;
+    private Label fats_intake;
     @FXML
-    private TextField kcal_left;
+    private Label kcal_left;
 
     @FXML
     private String username;
